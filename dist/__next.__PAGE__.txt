@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[97367,["/_next/static/chunks/0dbhjjzl8qfwv.js"],"OutletBoundary"]
+3:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex-1 flex flex-col items-center justify-center","children":[["$","h1",null,{"children":"There is nothing here"}],["$","h1",null,{"children":"please click this button"}],["$","h1",null,{"children":"Hey look a new button"}],["$","a",null,{"href":"/blog/","children":"Blog"}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"yTIwjVSoXfIW5z3r5Xgyg"}
+4:null

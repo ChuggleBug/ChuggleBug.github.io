@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ ! -d dist ]]; then
+    echo "Building..."
+    ./build > /dev/null
+fi
+
+echo "Running on http://localhost:8080"
+httpd -D FOREGROUND -C "DocumentRoot `pwd`/dist" -C "Listen localhost:8080"

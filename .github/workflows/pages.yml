@@ -1,0 +1,95 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # -----------------------
+      # Setup Node (pages app)
+      # -----------------------
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+            node-version: 20
+            cache: npm
+            cache-dependency-path: src/pages/package-lock.json
+
+      - name: Install Pages dependencies
+        working-directory: src/pages
+        run: npm install
+
+      - name: Build Pages project
+        working-directory: src/pages
+        run: npm run build
+
+      # -----------------------
+      # Setup Ruby (Jekyll blog)
+      # -----------------------
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+           ruby-version: 3.2
+           bundler-cache: true
+
+      - name: Install Jekyll dependencies
+        working-directory: src/blog
+        run: bundle install
+
+      - name: Build Jekyll blog
+        working-directory: src/blog
+        run: bundle exec jekyll build
+
+      # -----------------------
+      # Assemble dist folder
+      # -----------------------
+      - name: Prepare dist folder
+        run: |
+          rm -rf dist
+          mkdir -p dist
+
+          mv src/pages/out dist
+          mv src/blog/_site dist/blog
+
+      # -----------------------
+      # Upload artifact for Pages
+      # -----------------------
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      # -----------------------
+      # Prevent GithubPages jekyll from running
+      # -----------------------
+      - name: Disable Jekyll processing
+        run: touch dist/.nojekyll
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ -d dist ]]; then
+    rm -fr dist
+fi
+
+# Pages project
+cd src/pages
+npm run build
+mv out ../../dist
+cd ../..
+
+# jekyll project
+cd src/blog
+bundle exec jekyll build
+mv _site ../../dist/blog
+cd ../..
