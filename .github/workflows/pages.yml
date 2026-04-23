@@ -22,20 +22,20 @@ jobs:
         uses: actions/checkout@v4
 
       # -----------------------
-      # Setup Node (pages app)
+      # Setup Node (Pages app)
       # -----------------------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-            node-version: 20
-            cache: npm
-            cache-dependency-path: src/pages/package-lock.json
+          node-version: 20
+          cache: npm
+          cache-dependency-path: src/pages/package-lock.json
 
       - name: Install Pages dependencies
         working-directory: src/pages
-        run: npm install
+        run: npm ci
 
-      - name: Build Pages project
+      - name: Build Pages site
         working-directory: src/pages
         run: npm run build
 
@@ -45,8 +45,8 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-           ruby-version: 3.2
-           bundler-cache: true
+          ruby-version: 3.2
+          bundler-cache: true
 
       - name: Install Jekyll dependencies
         working-directory: src/blog
@@ -57,29 +57,30 @@ jobs:
         run: bundle exec jekyll build
 
       # -----------------------
-      # Assemble dist folder
+      # Assemble final site (dist/)
       # -----------------------
       - name: Prepare dist folder
         run: |
           rm -rf dist
           mkdir -p dist
 
-          mv src/pages/out dist
-          mv src/blog/_site dist/blog
+          # IMPORTANT: flatten Pages build to root
+          rsync -a src/pages/out/ dist/
+
+          # Blog goes under /blog
+          mkdir -p dist/blog
+          rsync -a src/blog/_site/ dist/blog/
+
+          # Prevent GitHub Pages from running Jekyll
+          touch dist/.nojekyll
 
       # -----------------------
-      # Upload artifact for Pages
+      # Upload artifact
       # -----------------------
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-
-      # -----------------------
-      # Prevent GithubPages jekyll from running
-      # -----------------------
-      - name: Disable Jekyll processing
-        run: touch dist/.nojekyll
 
   deploy:
     needs: build
