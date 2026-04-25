@@ -1,33 +1,52 @@
-name: Build and Deploy to GitHub Pages
+# Name of action
+name: Build and Deploy Website to GitHub Pages
 
+# What "Action" will trigger this
+# In this case, this triggers on
+# "When main is pushed"
 on:
   push:
     branches: ["main"]
 
+# Required permissions
+# - reading repo contents
+# - writing to Pages environment
+# - token??? (required to function)
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# If two pushes happen, cancel the 
+# current running one
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
+# Set of "Actions" to do
 jobs:
+  # Setup all static content
   build:
     runs-on: ubuntu-latest
 
     steps:
+
+      # -----------------------
+      # Tell GH Actions to get this repo
+      # -----------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # -----------------------
-      # Setup Node (Pages app)
-      # -----------------------
+      # ----------------------------------------------
+      # Setup Node environement
+      # ----------------------------------------------
+      # install any dependencies inside
+      # package-lock
+      # ----------------------------------------------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
           cache-dependency-path: src/pages/package-lock.json
 
@@ -39,13 +58,17 @@ jobs:
         working-directory: src/pages
         run: npm run build
 
-      # -----------------------
-      # Setup Ruby (Jekyll blog)
-      # -----------------------
+      # ----------------------------------------------
+      # Setup Ruby (required by Jekyll)
+      # ----------------------------------------------
+      # Software developed on ruby 3.4.1, so we use that
+      # Using bundle, install any dependencies and
+      # produce static output
+      # ----------------------------------------------
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2
+          ruby-version: 3.4.1
           bundler-cache: true
 
       - name: Install Jekyll dependencies
@@ -56,34 +79,39 @@ jobs:
         working-directory: src/blog
         run: bundle exec jekyll build
 
-      # -----------------------
-      # Assemble final site (dist/)
-      # -----------------------
+      # ----------------------------------------------
+      # Build Document Root
+      # ----------------------------------------------
+      # Structure:
+      #   - root dir: Next.js
+      #   - blog dir: Jekyll
+      #   - any other dir: also Next.js
+      # ----------------------------------------------
       - name: Prepare dist folder
         run: |
           rm -rf dist
           mkdir -p dist
 
-          # IMPORTANT: flatten Pages build to root
           rsync -a src/pages/out/ dist/
 
-          # Blog goes under /blog
           mkdir -p dist/blog
           rsync -a src/blog/_site/ dist/blog/
 
-          # Prevent GitHub Pages from running Jekyll
           touch dist/.nojekyll
 
-      # -----------------------
-      # Upload artifact
-      # -----------------------
+      # ----------------------------------------------
+      # Upload site to Pages
+      # ----------------------------------------------
+      # Because the website is built on 'dist',
+      # we have to tell GH Pages to look there
+      # ----------------------------------------------
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
-    needs: build
+    needs: build 
     runs-on: ubuntu-latest
 
     environment:
@@ -91,6 +119,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      # ----------------------------------------------
+      # Let Pages handle it from here
+      # ----------------------------------------------
+      # Since we gave it Document Root, we can now
+      # just tell it to deploy whatever we gave it
+      # ----------------------------------------------
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
