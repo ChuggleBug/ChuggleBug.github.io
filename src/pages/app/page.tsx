@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 export default function Home() {
   
@@ -11,6 +12,9 @@ export default function Home() {
           Would be unable to prefetch during development
         */}
         <a href="/blog/">Blog</a>
+
+        <h1>look some other button</h1>
+        <Link href='/soup/'> soup </Link>
 
     </div>
   );
