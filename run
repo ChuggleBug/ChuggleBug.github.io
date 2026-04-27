@@ -5,5 +5,5 @@ if [[ ! -d dist ]]; then
     ./build > /dev/null
 fi
 
-echo "Running on http://localhost:8080"
-httpd -D FOREGROUND -C "DocumentRoot `pwd`/dist" -C "Listen localhost:8080"
+echo "Running on http://localhost:8088"
+httpd -D FOREGROUND -C "DocumentRoot `pwd`/dist" -C "Listen localhost:8088"
