@@ -11,11 +11,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`h-full antialiased`}
+      className="h-full antialiased"
       data-google-analytics-opt-out=""
     >
-      <body className="min-h-full flex flex-col">
-        <MainHeader />
+      <body className="min-h-full flex flex-col ">
+        <MainHeader/>
         {children}
       </body>
     </html >

@@ -5,24 +5,42 @@ import Image from 'next/image';
 import logo from '@/assets/logo.svg'
 import ExternalLink from './ExternalLink';
 
+import '@/app/globals.css'
+
+type HeaderButtonProps = {
+  text: string;
+};
+
+export function HeaderButton({ text }: HeaderButtonProps) {
+  return (
+    <button className="hover:bg-app-purple-dark rounded px-7 py-1 transition-colors font-black text-light">
+      {text}
+    </button>
+  );
+}
+
 export default function MainHeader() {
   return (
+    <header className="flex w-full items-center bg-app-purple p-10 gap-10">
 
-    // <header className='flex w-full items-center'>
-      <header className="flex w-full items-center border-4 border-red-500">
       {/* Header Logo */}
       <Link href="/">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div className='flex items-center'>
           <Image src={logo.src} alt="A plate with food" width={50} height={50} />
-          <span style={{ marginLeft: '8px', fontWeight: 'bold' }}>Next Level Food</span>
+          <span className=''></span>
         </div>
       </Link>
 
       {/* Navigable Elements */}
-      <nav className='flex gap-5'>
-        <ExternalLink href='/blog'>Blog</ExternalLink>
+      <nav className='flex gap-2'>
+        <ExternalLink href='/blog'>
+          <HeaderButton text='Blog' />
+        </ExternalLink>
+        {/* <Link href='/toys'>
+          <HeaderButton text='Toys' />
+        </Link> */}
       </nav>
-      
+
     </header>
   );
 }

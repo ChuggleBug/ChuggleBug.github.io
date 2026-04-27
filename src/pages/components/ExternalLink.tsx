@@ -7,6 +7,8 @@ type ExternalLinkProps = {
 
 export default function ExternalLink(props: ExternalLinkProps) {
     return (
-        <a href={props.href}>{props.children}</a>
+        <a href={props.href}>
+            {props.children}
+        </a>
     )
 }

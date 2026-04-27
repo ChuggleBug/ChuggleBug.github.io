@@ -1,23 +1,33 @@
 
-import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
-  
+
   return (
-    <div >
-        <h1>There is nothing here</h1>
-        <h1>please click this button</h1>
+    <div className="w-full h-full flex justify-center items-center py-10 justify-evenly">
 
-        {/* 
-          Blog is not managed by Next.js. 
-          Would be unable to prefetch during development
-        */}
-        <a href="/blog/">Blog</a>
+      {/* Main body */}
+      <div className="h-full flex flex-col gap-5">
+        <h1 className="text-2xl font-bold">There isnt much here now</h1>
+        <div>
+          <p>Go click the blog button</p>
+        </div>
+      </div>
 
-        <h1>look some other button</h1>
-        <h1>hi</h1>
-        <Link href='/soup/'> soup </Link>
-
+      <div className="flex flex-col items-center bg-app-black p-8 rounded shadow gap-2">
+        <a href='https://tenor.com/vRj2a7yfTXB.gif'>
+          <Image
+            className="rounded"
+            src="/fish_spin.gif"
+            alt="Spinning fish GIF"
+            width={500}
+            height={500}
+            loading="eager"
+            unoptimized
+          />
+        </a>
+        <span className="text-light font-bold">Fish :)</span>
+      </div>
     </div>
   );
 }

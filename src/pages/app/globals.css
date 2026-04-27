@@ -1,1 +1,34 @@
 @import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-background: #F5F5F5;
+  --color-foreground: #171717;
+
+  --color-app-purple: #645FA0;
+  --color-app-purple-dark: #141543;
+  --color-app-purple-light: #C6D4FF;
+  --color-app-black: #3D3D3D;
+
+  /* Text */
+  --color-light: #F5F5F5;
+  --color-dark: #abcdef;
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+
+    
+  }
+} */
+
+/* Base styles */
+body {
+  @apply bg-background text-foreground font-sans;
+}
