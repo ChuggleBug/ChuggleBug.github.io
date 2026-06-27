@@ -1,8 +1,5 @@
-_site
-.sass-cache
+*.gem
+.bundle
 .jekyll-cache
-.jekyll-metadata
-vendor
-
-# Github pages
-Gemfile.lock
+.sass-cache
+_site
