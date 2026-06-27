@@ -23,6 +23,13 @@ pre, code {
   font-size: 0.92rem;
 }
 
+// For inline code ONLY
+code:not(pre code) {
+  word-break: break-all;  // Can break at any character
+  overflow-wrap: anywhere;
+}
+
+
 h1 {
   font-size: clamp(1.85rem, 1.5rem + 1.6vw, 2.4rem);
   letter-spacing: -0.025em;
@@ -180,9 +187,9 @@ h1, h2, h3, h4, h5, h6 {
 p, strong, b, em, small, li, hr, table, figcaption {
     color: var(--text);
 }
-// .highlight, pre code, blockquote {
-//   border-radius: 0.5em;
-// }
+blockquote {
+  border-radius: 0.5em;
+}
 a {
   color: var(--links);
 }
@@ -365,6 +372,7 @@ div.highlighter-rouge:hover .code-copy {
 
 .post-title {
   margin-bottom: 0.6rem;
+  margin-right: 3rem;
 }
 .project-title {
   margin-bottom: 0.8rem;
