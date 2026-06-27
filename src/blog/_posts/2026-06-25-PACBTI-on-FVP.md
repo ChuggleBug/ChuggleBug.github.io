@@ -73,9 +73,7 @@ misc:
 
 
 ## Running and Debugging
-At this point, the source code can be build, but it will lack the ability to be debugged from the IDE. The [Arm Debugger](https://marketplace.visualstudio.com/items?itemName=Arm.arm-debugger) extension needs to be installed.
-
-The extension includes [a guide](https://marketplace.visualstudio.com/items?itemName=Arm.arm-debugger#work-with-a-virtual-target) on how to setup a `launch.json` configuration to debug using an FVP. The configuration used here looks like this:
+At this point, the source code can be built, but cannot be debugged from the IDE. The [Arm Debugger](https://marketplace.visualstudio.com/items?itemName=Arm.arm-debugger) extension needs to be installed. This extension includes [a guide](https://marketplace.visualstudio.com/items?itemName=Arm.arm-debugger#work-with-a-virtual-target) on how to setup a `launch.json` configuration to debug using an FVP. The configuration used here looks like this:
 
 ```json
 {   
@@ -99,7 +97,7 @@ The extension includes [a guide](https://marketplace.visualstudio.com/items?item
 ```
 
 ### `fvp_config.txt`
-Under the `launch.json` configuration file there is an option named `Model Parameters File`. After generating the file, copy the following configurations into the file:
+Under the `launch.json` configuration page there is an option named `Model Parameters File`. After generating the file, copy the following configurations into the file:
 
 ```plaintext
 # Parameters:
@@ -110,7 +108,7 @@ cpu0.INITSVTOR=0x00000000                              # (int   , init-time) def
 #------------------------------------------------------------------------------
 ```
 
-At this point, after building, the software will be able to be debugged through the IDE's built-in debugger:
+Now the source code can be debugged through the IDE's built-in debugger. An example is shown here:
 
 ![Demonstration screen showing debugging inside of VS Code. The dissasembly panel is shown with the `PACBTI` instruction highlighted.](/blog/assets/images/Using_PACBTI_on_a_Cortex-M85/debug_example.png)
 > Note the inclusion of the `PACBTI` instruction. In this image, the core will enter a `HardFault` before returning from `main`
