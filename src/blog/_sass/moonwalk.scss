@@ -81,23 +81,22 @@ div.highlighter-rouge pre code, pre code.highlighter-rouge {
   padding: 1em;
 }
 // Language label, derived from rouge's language-* class via JS (see code_copy.html)
-// .code-lang {
-//   position: absolute;
-//   top: 0.5em;
-//   left: 0.75em;
-//   font-family: var(--font-mono);
-//   font-size: 0.65rem;
-//   letter-spacing: 0.06em;
-//   text-transform: uppercase;
-//   font-weight: 500;
-//   color: var(--text-secondary);
-//   opacity: 0.7;
-//   user-select: none;
-//   pointer-events: none;
-// }
 .code-lang {
-  visibility: hidden;
+  position: absolute;
+  // top: 0.5em;
+  // left: 0.75em;
+  // font-family: var(--font-mono);
+  // font-size: 0.65rem;
+  // letter-spacing: 0.06em;
+  // text-transform: uppercase;
+  // font-weight: 500;
+  // color: var(--text-secondary);
+  // opacity: 0.7;
+  // user-select: none;
+  // pointer-events: none;
+  visibility: hidden; // We dont want this to show
 }
+
 
 blockquote {
   font-style: normal;
