@@ -1,19 +1,17 @@
 ---
 layout: post
-title:  "Using PACBTI on a Cortex-M85"
+title:  "Getting Started with PACBTI for Armv8-M"
 date:   2026-06-25 -0700
 categories: Armv8-M
 ---
 
 > Figuring all of this out was NOT fun, so I'm writing this down.
 
-
-# Introduction
+Added to the Arm8.1-M architecture, the Pointer Authentication and Branch Target Identification (PACBTI) Extension helps mitigate code reuse attacks by introducing a form of control flow integrity. The technical details will not be given here, but more information can be found inside of the [architecture reference manual](https://developer.arm.com/documentation/ddi0553/bz/) (Chapter B6. Pointer authentication and branch target identification Extension).
 
 # Getting Started
 
-## Development Environment
-The following environment written with Fedora 44 for x86_64[^1]
+While not the most comprehensive IDE to explore this feature, as it does not provide as much integrated tools as µVision IDE, VS Code can be used to explore PACBTI. Note that the following guide was tested using Fedora 44 for x86_64[^1]
 
 ## Setting up VS Code
 [Keil MDK v6](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) is offered as a VS Code extension. After opening the extension panel, simply create a new project with the following options:
@@ -49,7 +47,7 @@ The only change here is that we need to use the Fixed Virtual Platforms provided
 !["CMSIS: Manage Solution Settings" page from the Arm Keil Studio Pack (MDK v6) extension. Under the "Debug Adapter for Target ARMCM85", "Arm-FVP" is selected from the dropdown menu (the checkbox selected). The model is set to "FVP_MPS2_Cortex-M85." The rest of the options are set to defaults.](/blog/assets/images/Using_PACBTI_on_a_Cortex-M85/setting_fvp.png)
 
 ### Minor Source Code Tweaks
-There are some minor changes that need to be done in order to build the source code correctly
+There are some minor changes that need to be done in order to build the source code correctly:
 
 - Because the project was set to Secure, there are some symbols that will be missing (The linker complains about a symbol `Image$$STACKSEAL$$ZI$$Base`). To fix this add `-mcmse` to `Project/RTE/Device/ARMCM85/ARMCM85_ac6.sct`. This file should look like this:
 
@@ -77,7 +75,7 @@ misc:
 ## Running and Debugging
 At this point, the source code can be build, but it will lack the ability to be debugged from the IDE. The [Arm Debugger](https://marketplace.visualstudio.com/items?itemName=Arm.arm-debugger) extension needs to be installed.
 
-The extension includes [a guide](https://marketplace.visualstudio.com/items?itemName=Arm.arm-debugger#work-with-a-virtual-target) on how to setup a `launch.json` configuration to debug using an FVP. The configuration used here looks like this
+The extension includes [a guide](https://marketplace.visualstudio.com/items?itemName=Arm.arm-debugger#work-with-a-virtual-target) on how to setup a `launch.json` configuration to debug using an FVP. The configuration used here looks like this:
 
 ```json
 {   
@@ -117,4 +115,4 @@ At this point, after building, the software will be able to be debugged through 
 ![Demonstration screen showing debugging inside of VS Code. The dissasembly panel is shown with the `PACBTI` instruction highlighted.](/blog/assets/images/Using_PACBTI_on_a_Cortex-M85/debug_example.png)
 > Note the inclusion of the `PACBTI` instruction. In this image, the core will enter a `HardFault` before returning from `main`
 
-[^1]: That flavor of linux *should* not matter as long as it is for an x86_64 architecture. Additionally, after some light testing, part of this guide should also work for Windows, but will not be confirmed here. MacOS does not work as it does not support the Fixed Virtual Platforms required.
+[^1]: This guide *should* apply to any flavor of Linux and version of Windows, but is not guaranteed. MacOS does not work as it does not support the Fixed Virtual Platforms required.
