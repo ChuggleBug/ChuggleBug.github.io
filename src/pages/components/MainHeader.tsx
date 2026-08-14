@@ -13,31 +13,35 @@ type HeaderButtonProps = {
 
 export function HeaderButton({ text }: HeaderButtonProps) {
   return (
-    <button className="hover:bg-app-purple-dark rounded px-7 py-1 transition-colors font-black text-light">
+    <button className='px-10 py-3 glass-card font-bold text-white'>
       {text}
     </button>
+
+    // <button className="hover:bg-app-purple-dark rounded px-7 py-1 transition-colors font-black text-light">
+    //   {text}
+    // </button>
   );
 }
 
 export default function MainHeader() {
   return (
-    <header className="flex w-full items-center bg-app-purple p-10 gap-10">
+    <header className="flex w-full items-center p-10 gap-10">
 
       {/* Header Logo */}
       <Link href="/">
         <div className='flex items-center'>
-          <Image src={logo.src} alt="A plate with food" width={50} height={50} />
+          <Image src={logo.src} alt="Website Logo" width={75} height={75} />
           <span className=''></span>
         </div>
       </Link>
 
       {/* Navigable Elements */}
-      <nav className='flex gap-2'>
+      <nav className='flex gap-5'>
         <ExternalLink href='/blog'>
           <HeaderButton text='Blog' />
         </ExternalLink>
-        {/* <Link href='/toys'>
-          <HeaderButton text='Toys' />
+        {/* <Link href='/soup'>
+          <HeaderButton text='Test' />
         </Link> */}
       </nav>
 

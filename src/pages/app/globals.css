@@ -2,7 +2,7 @@
 
 @theme {
   /* Colors */
-  --color-background: #F5F5F5;
+  --color-background: #0C090A;
   --color-foreground: #171717;
 
   --color-app-purple: #645FA0;
@@ -12,7 +12,7 @@
 
   /* Text */
   --color-light: #F5F5F5;
-  --color-dark: #abcdef;
+  /* --color-dark: #abcdef; */
 
   /* Fonts */
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
@@ -31,4 +31,14 @@
 /* Base styles */
 body {
   @apply bg-background text-foreground font-sans;
+}
+
+.glass-card {
+  /* From https://css.glass */
+  background: rgba(171, 171, 171, 0.20);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.27);
+  border-radius: 10px;
 }

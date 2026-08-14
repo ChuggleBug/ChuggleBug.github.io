@@ -14,9 +14,13 @@ export default function RootLayout({
       className="h-full antialiased"
       data-google-analytics-opt-out=""
     >
-      <body className="min-h-full flex flex-col ">
-        <MainHeader/>
-        {children}
+      <body className="min-h-full md:flex">
+        <div className="md:absolute">
+          <MainHeader/>
+        </div>
+        <div className="flex-1">
+          {children}
+        </div>
       </body>
     </html >
   );
