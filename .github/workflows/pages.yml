@@ -48,14 +48,14 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: src/pages/package-lock.json
+          cache-dependency-path: src/app/package-lock.json
 
       - name: Install Pages dependencies
-        working-directory: src/pages
+        working-directory: src/app
         run: npm ci
 
-      - name: Build Pages site
-        working-directory: src/pages
+      - name: Build Personal Website
+        working-directory: src/app
         run: npm run build
 
       # ----------------------------------------------
@@ -92,7 +92,7 @@ jobs:
           rm -rf dist
           mkdir -p dist
 
-          rsync -a src/pages/out/ dist/
+          rsync -a src/app/dist/ dist/
 
           mkdir -p dist/blog
           rsync -a src/blog/_site/ dist/blog/
