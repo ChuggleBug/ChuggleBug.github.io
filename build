@@ -4,10 +4,10 @@ if [[ -d dist ]]; then
     rm -fr dist
 fi
 
-# Pages project
-cd src/pages
+# Personal website project
+cd src/app
 npm run build
-mv out ../../dist
+mv dist ../..
 cd ../..
 
 # jekyll project
