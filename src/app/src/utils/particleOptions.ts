@@ -1,9 +1,9 @@
 
 const particleOptions = {
-  "fullScreen": {
-    "enabled": true,
-    "z-index": -1
-  },
+  // "fullScreen": {
+  //   "enabled": true,
+  //   "z-index": -1
+  // },
   "fpsLimit": 60,
   "particles": {
     "number": {
