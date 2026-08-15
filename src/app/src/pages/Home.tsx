@@ -1,6 +1,5 @@
 
 import fishSpin from "../assets/fish_spin.gif";
-import { IoIosArrowDown } from "react-icons/io";
 import { GlassButton } from "../components/GlassContent";
 import { Link } from "react-router";
 
@@ -45,11 +44,11 @@ export default function Home() {
             </StarCover>
 
             <div className="w-full absolute inset-x-0 bottom-0 text-white pb-5 flex items-center justify-center">
-                <GlassButton className="px-3">
-                    <Link to="/stars">
+                <Link to="/stars">
+                    <GlassButton className="px-3">
                         Click to see the stars
-                    </Link>
-                </GlassButton>
+                    </GlassButton>
+                </Link>
             </div>
 
         </div >
