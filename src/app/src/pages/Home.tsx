@@ -1,25 +1,57 @@
 
-import fishSpin from "../assets/fish_spin.gif"
+import fishSpin from "../assets/fish_spin.gif";
+import { IoIosArrowDown } from "react-icons/io";
+import { GlassButton } from "../components/GlassContent";
+import { Link } from "react-router";
+
+
+import "../App.css";
+
+type StarCoverProps = {
+    children: React.ReactNode;
+};
+
+function StarCover({ children }: StarCoverProps) {
+    return (
+        <div className="h-full w-fit flex flex-col justify-center items-center">
+            <div className="flex star-cover flex-col-reverse md:flex-row items-center justify-center space-x-10 p-5">
+                {children}
+            </div>
+        </div>
+    );
+}
 
 export default function Home() {
     return (
-        <div className="h-full bg-background flex flex-col-reverse md:flex-row items-center justify-center gap-10 p-5">
-            <div className="text-white max-w-100 md:max-w-175 text-justify md:pr-25">
-                <h1>Welcome</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi 
-                    iaculis, quam eu faucibus aliquet, mauris tellus mollis risus, 
-                    et lobortis massa enim eu orci. Integer eget porttitor est
-                </p>
+        // Take up all the space
+        <div className="h-full w-full flex flex-col justify-center items-center">
+            <StarCover>
+                <div className="text-white max-w-100 md:max-w-175 text-justify md:pr-25 w-fit">
+                    <h1>Welcome</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                        iaculis, quam eu faucibus aliquet, mauris tellus mollis risus,
+                        et lobortis massa enim eu orci. Integer eget porttitor est
+                    </p>
+                </div>
+                <img
+                    className="rounded"
+                    src={fishSpin}
+                    alt="Spinning fish GIF"
+                    width={500}
+                    height={500}
+                    loading="eager"
+                />
+            </StarCover>
+
+            <div className="w-full absolute inset-x-0 bottom-0 text-white pb-5 flex items-center justify-center">
+                <GlassButton className="px-3">
+                    <Link to="/stars">
+                        Click to see the stars
+                    </Link>
+                </GlassButton>
             </div>
-            <img
-                className="rounded"
-                src={fishSpin}
-                alt="Spinning fish GIF"
-                width={500}
-                height={500}
-                loading="eager"
-            />
-        </div>
+
+        </div >
     );
 }

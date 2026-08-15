@@ -1,12 +1,13 @@
 
 const particleOptions = {
-  // "background": {
-  //   "color": "#000000"
-  // },
+  "fullScreen": {
+    "enabled": true,
+    "z-index": -1
+  },
   "fpsLimit": 60,
   "particles": {
     "number": {
-      "value": 150,
+      "value": 250,
     },
     "color": {
       "value": "#ffffff"
