@@ -1,2 +1,3 @@
 # Produced by build and run
 dist
+*/*/.DS_Store
