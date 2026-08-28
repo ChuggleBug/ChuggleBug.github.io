@@ -11,41 +11,41 @@ import { useCallback, useEffect, useState } from "react";
 
 
 function SidebarNavigator() {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleOpen = () => {
-    setIsOpen(!isOpen);
-  }
+    setIsOpen((prev) => !prev);
+  };
 
   const handleEscape = useCallback((event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      setIsOpen(false);
+      toggleOpen();
     }
-  }, []);
+  }, []); // functional updater means no dependency on isOpen needed
 
   useEffect(() => {
     document.addEventListener('keydown', handleEscape);
 
     return () => {
-      setIsOpen(false);
-    }
-  }, [])
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [handleEscape]);
 
   return (
     <>
       {/* Open Sidebar button */}
-      <div className="fixed z-10 top-5 left-5" onClick={toggleOpen}>
+      <div className="cursor-pointer fixed z-10 top-5 left-5" onClick={toggleOpen}>
         <GlassButton className="p-2">
           <GiHamburgerMenu size={30} />
         </GlassButton>
       </div>
 
-      {/* Sidebar content */}
-      <nav className={`z-10 sidebar ${isOpen && `open`}`}>
-        <div className="relative flex flex-col gap-5 w-full top-5 left-5">
+      {/* Sidebar content. Make sure it cant be interacted with when closed */}
+      <nav className={`z-10 sidebar ${isOpen ? `open` : ``}`} inert={!isOpen ? true : undefined}>
+        <div className="relative flex flex-col w-full top-5 text-white font-bold">
 
-          <div className="flex flex-row items-center gap-2">
-            <div className="p-2" onClick={toggleOpen}>
+          <div className="flex flex-row items-center gap-2 relative left-5">
+            <div className="cursor-pointer p-2" onClick={toggleOpen}>
               <GiHamburgerMenu size={30} color='white' />
             </div>
             <Link to="/" onClick={() => setIsOpen(false)}>
@@ -53,18 +53,22 @@ function SidebarNavigator() {
             </Link>
           </div>
 
+          {/* Buttons */}
+          <Link to='/' className="sidebar-element" onClick={() => setIsOpen(false)}>
+            <div className="pl-5 py-3 min-w-20">Home</div>
+          </Link>
           {/* Points to non-react managed website */}
-          <a href='/blog' onClick={() => setIsOpen(false)}>
-            <GlassButton className="py-3 min-w-20">Blog</GlassButton>
+          <a href='/blog' className="sidebar-element" onClick={() => setIsOpen(false)}>
+            <div className="pl-5 py-3 min-w-20">Blog</div>
           </a>
-          <Link to='/about' onClick={() => setIsOpen(false)}>
-            <GlassButton className="py-3 min-w-20">About</GlassButton>
+          <Link to='/about' className="sidebar-element" onClick={() => setIsOpen(false)}>
+            <div className="pl-5 py-3 min-w-20">About</div>
           </Link>
         </div>
       </nav>
 
       {/* Blur layer */}
-      <div className={`fixed z-0 inset-0 w-screen h-screen sidebar-blur ${isOpen && `show`} `} onClick={() => setIsOpen(false)}></div>
+      <div className={`fixed z-0 inset-0 w-screen h-screen sidebar-blur ${isOpen ? `show` : ``} `} onClick={() => setIsOpen(false)}></div>
     </>
   );
 }

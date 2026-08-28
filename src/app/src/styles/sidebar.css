@@ -32,3 +32,12 @@
     opacity: 1;
     visibility: visible;
 }
+
+.sidebar-element {
+    transition: background-color 0.2s ease-out;
+    background-color: var(--color-background);
+}
+
+.sidebar-element:hover {
+    background-color: color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%)
+}
