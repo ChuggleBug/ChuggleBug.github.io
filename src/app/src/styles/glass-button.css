@@ -30,7 +30,7 @@
   transition-duration: var(--default-transition-duration);
 }
 
-.glass-button:hover,
-.glass-button:active {
+/* .glass-button:active, */
+.glass-button:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }

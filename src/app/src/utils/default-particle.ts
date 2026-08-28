@@ -1,10 +1,11 @@
 
-const particleOptions = {
-  // "fullScreen": {
-  //   "enabled": true,
-  //   "z-index": -1
-  // },
-  "fpsLimit": 60,
+import { isMobile } from 'react-device-detect'
+
+export type ParticleOptions = any;
+
+export const defaultParticleOptions = {
+  "fpsLimit": isMobile ? 30 : 60,
+  "detectRetina": !isMobile,
   "particles": {
     "number": {
       "value": 250,
@@ -44,7 +45,6 @@ const particleOptions = {
     },
     "move": {
       "enable": true,
-      // "speed": {"min": 0.001, "max": 0.1}
       "speed": { "min": 0.05, "max": 0.2 }
     },
     "links": {
@@ -61,7 +61,7 @@ const particleOptions = {
       }
     }
   },
-  "detectRetina": true
 };
 
-export default particleOptions;
+
+export default defaultParticleOptions;

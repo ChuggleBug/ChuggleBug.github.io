@@ -47,7 +47,7 @@ export default function Home() {
 
             <div className="w-full absolute inset-x-0 bottom-0 text-white pb-5 flex items-center justify-center">
                 <Link to="/stars">
-                    <GlassButton className="px-3">
+                    <GlassButton className="p-3">
                         Click to see the stars
                     </GlassButton>
                 </Link>
