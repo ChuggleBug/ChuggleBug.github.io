@@ -4,7 +4,7 @@ import "../styles/glass-button.css";
 export default function About() {
     return (
         <div className="h-full w-full flex flex-col justify-center items-center">
-            <div className="w-fit h-fit p-20">
+            <div className="w-fit h-fit lg:p-20 p-5">
                 <div className="flex glass-panel p-10">
                     <div className="flex-2">
                         <h1>About</h1>
@@ -21,7 +21,7 @@ export default function About() {
 
                             ... Something something, enjoy the stars on this page</p>
                     </div>
-                    <div className="flex-1"></div>
+                    <div className="lg:flex-1"></div>
                 </div>
             </div>
         </div>
