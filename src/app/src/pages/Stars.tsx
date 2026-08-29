@@ -7,7 +7,7 @@ import Slider from '@mui/material/Slider';
 import defaultParticleOptions from '../utils/default-particle';
 import { setParticleOptions } from '../utils/particle-store';
 import { GlassButton } from '../components/GlassContent';
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
 
 
 function buildOptions(flickerRate: number, starCount: number, starMovement: number) {
