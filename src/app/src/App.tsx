@@ -1,6 +1,6 @@
 
 
-import { BrowserRouter, Routes, Route } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 import AppNavigator from "./components/AppNavigator";
 import ParticleBackground from "./components/ParticleBackground";
 
@@ -11,7 +11,7 @@ import Stars from "./pages/Stars";
 export default function App() {
   return (
     <div className="w-screen h-screen">
-      <BrowserRouter>
+      <HashRouter>
         <div className="relative h-full w-full">
           <div className="absolute inset-0 z-0 pointer-events-none">
             <ParticleBackground />
@@ -29,7 +29,7 @@ export default function App() {
             </Routes>
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
       
     </div>
   );
