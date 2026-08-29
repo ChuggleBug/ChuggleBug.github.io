@@ -1,9 +1,14 @@
 
+import "../styles/star-control.css"
+
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import defaultParticleOptions from '../utils/default-particle';
 import { setParticleOptions } from '../utils/particle-store';
+import { GlassButton } from '../components/GlassContent';
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+
 
 function buildOptions(flickerRate: number, starCount: number, starMovement: number) {
     const opt = structuredClone(defaultParticleOptions);
@@ -18,9 +23,10 @@ function buildOptions(flickerRate: number, starCount: number, starMovement: numb
 }
 
 export default function Stars() {
-    const [flickerRate, setFlickerRate] = useState<number>(1)
-    const [starCount, setStarCount] = useState<number>(defaultParticleOptions.particles.number.value)
-    const [starMovement, setStarMovement] = useState<number>(1)
+    const [flickerRate, setFlickerRate] = useState<number>(1);
+    const [starCount, setStarCount] = useState<number>(defaultParticleOptions.particles.number.value);
+    const [starMovement, setStarMovement] = useState<number>(1);
+    const [menuOpen, setMenuOpen] = useState<boolean>(true);
 
     useEffect(() => {
         setParticleOptions(buildOptions(flickerRate, starCount, starMovement));
@@ -30,7 +36,11 @@ export default function Stars() {
         return () => {
             setParticleOptions(defaultParticleOptions)
         }
-    });
+    }, []);
+
+    const handleToggle = () => {
+        setMenuOpen((prev) => !prev);
+    }
 
     const handleChange = (cb: (v: number) => void) => {
         return (_: Event, value: number | number[], __: number) => {
@@ -41,8 +51,18 @@ export default function Stars() {
     }
 
     return (
-        <div className="absolute bottom-5 right-5">
-            <div className='glass-panel p-5'>
+        <div className={`star-panel-main ${menuOpen ? `` : `closed`}`}>
+
+            {/* Toggle */}
+            <div onClick={handleToggle} className={`star-panel-toggle ${menuOpen ? `` : `closed`}`}>
+                <GlassButton className="p-2">
+                    <div className={`${menuOpen ? `` : `rotate-180`} transition-transform`}>
+                        <FaAngleDown size={30} />
+                    </div>
+                </GlassButton>
+            </div>
+
+            <div className={`glass-panel star-panel-control ${menuOpen ? `` : `closed`}`} inert={!menuOpen ? true : undefined}>
                 <Box sx={{ width: 200 }}>
                     <div>
                         <p>Star Twinkle: x{flickerRate}</p>
