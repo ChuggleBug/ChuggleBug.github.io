@@ -88,6 +88,10 @@ function DefaultNavigator() {
         <Link to='/about'>
           <GlassButton className="py-3 min-w-20">About</GlassButton>
         </Link>
+
+        <a href='/apps/test_app/index.html'>
+          <GlassButton className="py-3 min-w-20">Test</GlassButton>
+        </a>
       </nav>
 
     </header>

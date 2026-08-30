@@ -5,7 +5,7 @@ if [[ -d dist ]]; then
 fi
 
 # Personal website project
-cd src/app
+cd src/homepage
 npm run build
 mv dist ../..
 cd ../..
