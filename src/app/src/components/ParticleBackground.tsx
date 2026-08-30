@@ -5,16 +5,21 @@ import { useCallback, useSyncExternalStore } from "react";
 import { loadSlim } from "@tsparticles/slim";
 import { type Engine, type Container } from "@tsparticles/engine";
 
-import { getParticleOptions, subscribeParticleOptions } from "../utils/particle-store";
+import { getParticleOptions, setParticlesContainer, subscribeParticleOptions } from "../utils/particle-control";
 
 const particlesInit = async (engine: Engine) => {
   await loadSlim(engine);
 };
 
 export default function ParticleBackground() {
-  const particlesLoaded = useCallback(async (_?: Container) => {}, []);
-
   const options = useSyncExternalStore(subscribeParticleOptions, getParticleOptions);
+
+  const particlesLoaded = useCallback(async (container?: Container) => {
+    if (container) {
+      setParticlesContainer(container);
+    }
+  }, []);
+
 
   return (
     <ParticlesProvider init={particlesInit}>
