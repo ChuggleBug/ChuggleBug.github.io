@@ -1,7 +1,7 @@
 
 import "../styles/star-control.css"
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import defaultParticleOptions from '../utils/default-particle';
@@ -65,11 +65,25 @@ export default function Stars() {
     const [flickerRate, setFlickerRate] = useState<number>(1);
     const [starCount, setStarCount] = useState<number>(defaultParticleOptions.particles.number.value);
     const [starSpeed, setStarSpeed] = useState<number>(1);
-    const [menuOpen, setMenuOpen] = useState<boolean>(false);
+    const [menuOpen, setMenuOpen] = useState<boolean>(true);
 
     const appliedFlickerRef = useRef<number>(1);
     const appliedCountRef = useRef<number>(defaultParticleOptions.particles.number.value);
     const appliedSpeedRef = useRef<number>(1);
+
+    const SPMainRef = useRef<HTMLDivElement>(null);
+    const SPToggleRef = useRef<HTMLDivElement>(null);
+    const [SPMainStyle, setSPMainStyle] = useState({});
+
+    const updateSPMainStyle = () => {
+        const SPMainHeight = SPMainRef.current?.clientHeight ?? 0;
+        const SPToggleHeight = SPToggleRef.current?.clientHeight ?? 0;
+        setSPMainStyle({
+            transform: `translateY(${SPMainHeight - SPToggleHeight}px)`
+        });
+    };
+
+    useLayoutEffect(updateSPMainStyle, [height]);
 
 
     // Note: Dev environment triggers a refresh on page entry
@@ -134,10 +148,10 @@ export default function Stars() {
     }
 
     return (
-        <div className={`star-panel-main ${menuOpen ? `` : `closed`}`}>
+        <div ref={SPMainRef} style={menuOpen ? {} : SPMainStyle} className={`star-panel-main ${menuOpen ? `` : `closed`}`}>
 
             {/* Toggle */}
-            <div onClick={handleToggle} className={`star-panel-toggle ${menuOpen ? `` : `closed`}`}>
+            <div ref={SPToggleRef} onClick={handleToggle} className={`star-panel-toggle ${menuOpen ? `` : `closed`}`}>
                 <GlassButton className="p-2">
                     <div className={`${menuOpen ? `` : `rotate-180`} transition-transform`}>
                         <FaAngleDown size={30} />

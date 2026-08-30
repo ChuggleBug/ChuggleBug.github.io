@@ -11,8 +11,7 @@
 
 /* Calculated beforehand */
 .star-panel-main.closed {
-    /* transform: translateY(85%); */
-    transform: translateY(230px);    
+    /* Refer to stars.tsx */
 }
 
 .star-panel-control {
