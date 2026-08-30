@@ -75,7 +75,7 @@ function SidebarNavigator() {
 
 function DefaultNavigator() {
   return (
-    <header className="flex w-full items-center p-10 gap-10">
+    <header className="flex w-full items-center fixed z-10 top-10 left-10 gap-10">
       <Link to="/">
         <img className="select-none" src={logo} width={75} height={75}></img>
       </Link>
