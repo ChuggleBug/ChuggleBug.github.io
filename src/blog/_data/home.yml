@@ -1,6 +1,6 @@
 navbar_entries:
   - title: Main Website
-    url: https://chugglebug.github.io/
+    url: /
 
   - title: About this Page
     url: /blog/about.html
