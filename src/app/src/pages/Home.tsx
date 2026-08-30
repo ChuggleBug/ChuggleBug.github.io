@@ -34,14 +34,15 @@ export default function Home() {
                             et lobortis massa enim eu orci. Integer eget porttitor est
                         </p>
                     </div>
-                    <img
-                        className="rounded"
-                        src={fishSpin}
-                        alt="Spinning fish GIF"
-                        width={500}
-                        height={500}
-                        loading="eager"
-                    />
+                    <div className="overflow-hidden rounded max-w-[500px] max-h-[300px]">
+                        <img
+                            src={fishSpin}
+                            alt="Spinning fish GIF"
+                            width={500}
+                            height={300}
+                            loading="eager"
+                        />
+                    </div>
                 </div>
             </StarCover>
 
