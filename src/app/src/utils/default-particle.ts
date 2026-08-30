@@ -8,7 +8,7 @@ export const defaultParticleOptions = {
   "detectRetina": !isMobile,
   "particles": {
     "number": {
-      "value": isMobile ? 250 : 1000,
+      "value": isMobile ? 250 : 500,
     },
     "color": {
       "value": "#ffffff"
