@@ -9,15 +9,16 @@
     /* background-color: #ffffff; */
     height: 100vh;
     transition: left 0.2s ease-in-out;
-    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
     position: fixed;
     left: calc(-1 * var(--sidebar-width));
 }
 
 .sidebar.open {
     left: 0px;
+    -webkit-box-shadow: 10px 0px 25px var(--color-background);
+    -moz-box-shadow: 10px 0px 25px var(--color-background);
     box-shadow: 10px 0px 25px var(--color-background);
-    /* box-shadow: 10px 0px 25px #ffffff; */
 }
 
 .sidebar-blur {
