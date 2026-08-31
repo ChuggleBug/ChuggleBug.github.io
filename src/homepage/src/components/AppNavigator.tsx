@@ -41,7 +41,7 @@ function SidebarNavigator() {
       </div>
 
       {/* Sidebar content. Make sure it cant be interacted with when closed */}
-      <nav className={`z-10 sidebar ${isOpen ? `open` : ``}`} inert={!isOpen ? true : undefined}>
+      <nav className={`z-20 sidebar ${isOpen ? `open` : ``}`} inert={!isOpen ? true : undefined}>
         <div className="relative flex flex-col w-full top-5 text-white font-bold">
 
           <div className="flex flex-row items-center gap-2 relative left-5">
@@ -71,7 +71,7 @@ function SidebarNavigator() {
       </nav>
 
       {/* Blur layer */}
-      <div className={`fixed z-0 inset-0 w-screen h-screen sidebar-blur ${isOpen ? `show` : ``} `} onClick={() => setIsOpen(false)}></div>
+      <div className={`fixed z-10 inset-0 w-screen h-screen sidebar-blur ${isOpen ? `show` : ``} `} onClick={() => setIsOpen(false)}></div>
     </>
   );
 }
