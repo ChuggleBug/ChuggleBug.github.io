@@ -31,15 +31,6 @@ export default function Home() {
                     </div>
                 </StarCover>
             </div>
-
-            <div className="w-full lg:fixed inset-x-0 bottom-5 pb-5 lg:pb-0 text-white flex items-center justify-center">
-                <Link to="/stars">
-                    <GlassButton className="p-3">
-                        Click to see the stars
-                    </GlassButton>
-                </Link>
-            </div>
-
         </div >
     );
 }
