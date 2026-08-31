@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-    --sidebar-width: 25vh
+    --sidebar-width: 25dvh
 }
 
 .sidebar {
@@ -11,7 +11,7 @@
     transition: left 0.2s ease-in-out;
     min-width: var(--sidebar-width);
     position: fixed;
-    left: calc(-1 * var(--sidebar-width));
+    left: calc(-2 * var(--sidebar-width));
 }
 
 .sidebar.open {
