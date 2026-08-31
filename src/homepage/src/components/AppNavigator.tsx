@@ -64,6 +64,9 @@ function SidebarNavigator() {
           <Link to='/about' className="sidebar-element" onClick={() => setIsOpen(false)}>
             <div className="pl-5 py-3 min-w-20">About</div>
           </Link>
+          <Link to='/toys' className="sidebar-element" onClick={() => setIsOpen(false)}>
+            <div className="pl-5 py-3 min-w-20">Toys</div>
+          </Link>
         </div>
       </nav>
 
@@ -88,10 +91,9 @@ function DefaultNavigator() {
         <Link to='/about'>
           <GlassButton className="py-3 min-w-20">About</GlassButton>
         </Link>
-
-        <a href='/apps/test_app/index.html'>
-          <GlassButton className="py-3 min-w-20">Test</GlassButton>
-        </a>
+        <Link to='/toys'>
+          <GlassButton className="py-3 min-w-20">Toys</GlassButton>
+        </Link>
       </nav>
 
     </header>
@@ -105,5 +107,5 @@ export default function AppNavigator() {
   const { _, width } = useWindowDimensions();
 
   // Medium screens and smaller get a sidebar
-  return width > 768 ? <DefaultNavigator /> : <SidebarNavigator />;
+  return width >= 768 ? <DefaultNavigator /> : <SidebarNavigator />;
 }
