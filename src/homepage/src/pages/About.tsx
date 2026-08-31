@@ -4,10 +4,10 @@ import "../styles/glass-button.css";
 export default function About() {
     return (
         <div className="h-full flex flex-col overflow-y-auto">
-            <div className="m-auto w-fit h-fit lg:p-20 p-5">
+            <div className="m-auto w-full h-fit lg:p-20 p-5">
                 <div className="flex glass-panel p-10">
                     <div className="flex-2">
-                        <h1>About</h1>
+                        <h2>About</h2>
                         <p className="text-left">
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Aenean non sagittis ipsum. Mauris ac nisl a
@@ -19,7 +19,8 @@ export default function About() {
                             Nullam sed tellus gravida, ultrices sapien nec,
                             iaculis dui.
 
-                            ... Something something, enjoy the stars on this page</p>
+                            ... Something something, enjoy the stars on this page
+                        </p>
                     </div>
                     <div className="lg:flex-1"></div>
                 </div>
