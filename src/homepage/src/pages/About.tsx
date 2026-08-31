@@ -22,7 +22,6 @@ export default function About() {
                             ... Something something, enjoy the stars on this page
                         </p>
                     </div>
-                    <div className="lg:flex-1"></div>
                 </div>
             </div>
         </div>
