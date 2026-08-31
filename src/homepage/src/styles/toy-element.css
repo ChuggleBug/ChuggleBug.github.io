@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+.toy-element {
+    padding: calc(var(--spacing) * 5);
+    height: 400px;
+    /* max-width: 300px; */
+    min-width: 250px;
+    transition: all 0.2s ease-out;
+}
+
+.toy-element:hover {
+    transform: translateY(-2px) translateX(1px);
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(255,255,255, 0.2);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(255,255,255, 0.2);
+    box-shadow: 0px 0px 10px 1px rgba(255,255,255, 0.2);
+    cursor: pointer;
+}
+
+.toy-title { 
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+ 
