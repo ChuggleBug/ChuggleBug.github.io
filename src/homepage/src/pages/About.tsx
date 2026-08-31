@@ -3,8 +3,8 @@ import "../styles/glass-button.css";
 
 export default function About() {
     return (
-        <div className="h-full flex flex-col overflow-y-auto">
-            <div className="m-auto w-full h-fit lg:p-20 p-5">
+        <div className="flex flex-col">
+            <div className="w-full lg:px-20 md:px-10 p-5">
                 <div className="flex glass-panel p-10">
                     <div className="flex-2">
                         <h2>About</h2>

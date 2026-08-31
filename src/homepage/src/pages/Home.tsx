@@ -1,13 +1,11 @@
 
 import fishSpin from "../assets/fish_spin.gif";
-import { GlassButton } from "../components/GlassContent";
-import { Link } from "react-router";
 import StarCover from "../components/StarCover";
 
 
 export default function Home() {
     return (
-        <div className="h-full w-full flex flex-col gap-5">
+        <div className="absolute inset-0 w-full flex flex-col gap-5">
             <div className="m-auto w-fit h-fit flex flex-col gap-2">
                 <StarCover>
                     <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-10 p-5">

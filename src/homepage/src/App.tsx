@@ -14,8 +14,8 @@ export default function App() {
     <div className="w-screen h-screen">
       <HashRouter>
         <div className="relative h-full w-full">
-          <AppNavigator />
 
+          <AppNavigator />
 
           <Routes>
             <Route path="/" element={<Home />} />

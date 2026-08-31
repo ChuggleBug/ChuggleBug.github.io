@@ -34,7 +34,7 @@ function SidebarNavigator() {
   return (
     <>
       {/* Open Sidebar button */}
-      <div className="cursor-pointer fixed z-10 top-5 left-5" onClick={toggleOpen}>
+      <div className="cursor-pointer w-fit sticky z-10 top-5 left-5 mb-5" onClick={toggleOpen}>
         <GlassButton className="p-2">
           <GiHamburgerMenu size={30} />
         </GlassButton>
@@ -78,7 +78,7 @@ function SidebarNavigator() {
 
 function DefaultNavigator() {
   return (
-    <header className="flex w-full items-center fixed z-10 top-10 left-10 gap-10">
+    <header className="flex w-fit items-center sticky z-10 top-10 left-10 mb-10 gap-10">
       <Link to="/">
         <img className="select-none" src={logo} width={75} height={75}></img>
       </Link>
