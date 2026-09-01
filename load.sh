@@ -14,10 +14,6 @@ load_repo() {
     local repo_url="$2"
     local url="$repo_url"
 
-    if [[ -n "$GH_LOAD_TOKEN" ]]; then
-        url="https://x-access-token:${GH_LOAD_TOKEN}@${repo_url#https://}"
-    fi
-
     echo "Loading $name from $repo_url"
     git clone "$url" "_work/$name"
 }

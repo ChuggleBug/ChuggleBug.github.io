@@ -48,8 +48,6 @@ jobs:
         run: chmod +x load.sh build.sh
 
       - name: Load external repos
-        env:
-          GH_BLOG_LOAD_TOKEN: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
         run: ./load.sh
 
       # ----------------------------------------------
