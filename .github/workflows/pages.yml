@@ -17,7 +17,7 @@ permissions:
   pages: write
   id-token: write
 
-# If two pushes happen, cancel the 
+# If two pushes happen, cancel the
 # current running one
 concurrency:
   group: "pages"
@@ -38,7 +38,20 @@ jobs:
         uses: actions/checkout@v6
 
       # ----------------------------------------------
-      # Setup Node environement
+      # Load external projects (blog, wikigraph, etc)
+      # ----------------------------------------------
+      # This clones the external repos into _work/
+      # so downstream steps (bundler-cache, build.sh)
+      # can see them.
+      # ----------------------------------------------
+      - name: Make scripts executable
+        run: chmod +x load.sh build.sh
+
+      - name: Load external repos
+        run: ./load.sh
+
+      # ----------------------------------------------
+      # Setup Node environment
       # ----------------------------------------------
       # install any dependencies inside
       # package-lock
@@ -54,50 +67,33 @@ jobs:
         working-directory: src/homepage
         run: npm ci
 
-      - name: Build Personal Website
-        working-directory: src/homepage
-        run: npm run build
-
       # ----------------------------------------------
       # Setup Ruby (required by Jekyll)
       # ----------------------------------------------
       # Software developed on ruby 3.4.1, so we use that
-      # Using bundle, install any dependencies and
-      # produce static output
+      # Blog now lives in _work/blog after load.sh runs,
+      # so bundler-cache needs to point there.
       # ----------------------------------------------
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.1
           bundler-cache: true
-
-      - name: Install Jekyll dependencies
-        working-directory: src/blog
-        run: bundle install
-
-      - name: Build Jekyll blog
-        working-directory: src/blog
-        run: bundle exec jekyll build
+          working-directory: _work/blog
 
       # ----------------------------------------------
-      # Build Document Root
+      # Build everything
       # ----------------------------------------------
-      # Structure:
-      #   - root dir: Next.js
-      #   - blog dir: Jekyll
-      #   - any other dir: also Next.js
+      # build.sh handles:
+      #   - homepage (npm run build -> dist/)
+      #   - blog (jekyll build -> dist/blog)
+      #   - wikigraph app (copy -> dist/app/wikigraph)
       # ----------------------------------------------
-      - name: Prepare dist folder
-        run: |
-          rm -rf dist
-          mkdir -p dist
+      - name: Build site
+        run: ./build.sh
 
-          rsync -a src/homepage/dist/ dist/
-
-          mkdir -p dist/blog
-          rsync -a src/blog/_site/ dist/blog/
-
-          touch dist/.nojekyll
+      - name: Add .nojekyll
+        run: touch dist/.nojekyll
 
       # ----------------------------------------------
       # Upload site to Pages
@@ -111,7 +107,7 @@ jobs:
           path: dist
 
   deploy:
-    needs: build 
+    needs: build
     runs-on: ubuntu-latest
 
     environment:
