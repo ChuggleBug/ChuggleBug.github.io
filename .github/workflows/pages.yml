@@ -48,6 +48,8 @@ jobs:
         run: chmod +x load.sh build.sh
 
       - name: Load external repos
+        env:
+          GH_BLOG_ACCESS_PAT: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
         run: ./load.sh
 
       # ----------------------------------------------
@@ -57,7 +59,7 @@ jobs:
       # package-lock
       # ----------------------------------------------
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
