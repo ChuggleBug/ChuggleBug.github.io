@@ -1,5 +1,6 @@
-# Produced by build and run
+# Produced by build run
 dist
+_work
 
 # .DS_Store :(
 **/.DS_Store
