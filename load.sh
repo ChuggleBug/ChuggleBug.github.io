@@ -6,6 +6,7 @@
 if [[ -d _work ]]; then
     rm -rf _work
 fi
+mkdir -p _work
 
 
 load_repo() {
