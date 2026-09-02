@@ -26,8 +26,8 @@ export const TOYS: ReadonlyArray<Toy> = [
         useReactLink: true,
     },
     {
-        title: "Test",
-        description: "test",
+        title: "WikiGraph",
+        description: "",
         webPath: "/app/wikigraph",
     },
 ];
