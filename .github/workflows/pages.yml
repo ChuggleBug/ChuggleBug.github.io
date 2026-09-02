@@ -102,7 +102,7 @@ jobs:
         with: 
           repository: ChuggleBug/WikiGraph
           name: dist
-          path: ./dist/blog
+          path: ./dist/app/wikigraph
           run-id: ${{ steps.get-run-wikigraph.outputs.run_id }}
           github-token: ${{ secrets.GH_APP_LOAD_TOKEN }}
 
