@@ -44,46 +44,106 @@ jobs:
         run: npm ci
 
       - name: Build Homepage
+        working-directory: src/homepage
         run: npm run build
 
+      - name: Add .nojekyll
+        run: touch ./src/homepage/dist/.nojekyll
+
       - name: Upload Homepage Build Artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: artifact
-          path: ./
+          path: ./src/homepage/dist 
           if-no-files-found: error
           retention-days: 1
-          # Note: This repo should ensure that is does make subpaths to
-          # '/blog' and '/app/**'
-          overwrite: true
-    
-      - name: Add .nojekyll
-        run: touch dist/.nojekyll
 
-  load_blog:
+  link_apps:
+    needs: build_homepage
     runs-on: ubuntu-latest
+
     steps:
-      - name: Get Run ID
-        id: get-run
-        env:
-              GH_TOKEN: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
-        run: |
-          RUN_ID=$(gh run list \
-            --repo ChuggleBug/Blog \
-            --status success \
-            --limit 1 \
-            --json databaseId \
-            --jq '.[0].databaseId')
-          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+      - parallel:
+        - name: Run ID Blog
+          id: get-run-blog
+          env:
+            GH_TOKEN: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
+          run: |
+            RUN_ID=$(gh run list \
+              --repo ChuggleBug/Blog \
+              --status success \
+              --limit 1 \
+              --json databaseId \
+              --jq '.[0].databaseId')
+            echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+        # - name: Run ID Wikigraph
+        #   id: get-run-wikigraph
+        #   env:
+        #     GH_TOKEN: ${{ secrets.GH_APP_LOAD_TOKEN }}
+        #   run: |
+        #     RUN_ID=$(gh run list \
+        #       --repo ChuggleBug/Wikigraph \
+        #       --status success \
+        #       --limit 1 \
+        #       --json databaseId \
+        #       --jq '.[0].databaseId')
+        #     echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
+        - parallel:
+          - name: Load Homepage
+            uses: actions/download-artifact@v8.0.1
+            with: 
+              name: artifact
+              path: ./dist
+
+          - name: Load Blog
+            uses: actions/download-artifact@v8.0.1
+            with: 
+              repository: ChuggleBug/WikiGraph
+              name: dist
+              path: ./dist/blog
+              run-id: ${{ steps.get-run-blog.outputs.run_id }}
+              github-token: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
+
+
+              
+
+
+
+
+
+            
+
+
+        
+    
+      
+    
+
+  # load_blog:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get Run ID
+  #       id: get-run
+  #       env:
+  #             GH_TOKEN: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
+  #       run: |
+  #         RUN_ID=$(gh run list \
+  #           --repo ChuggleBug/Blog \
+  #           --status success \
+  #           --limit 1 \
+  #           --json databaseId \
+  #           --jq '.[0].databaseId')
+  #         echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
           
-      - name: Upload Blog Build Artifact 
-        uses: actions/download-artifact@v7
-        with:     
-          name: artifact
-          path: ./blog
-          if-no-files-found: error
-          retention-days: 1
-          overwrite: true
+  #     - name: Upload Blog Build Artifact 
+  #       uses: actions/download-artifact@v7
+  #       with:     
+  #         name: artifact
+  #         path: ./blog
+  #         if-no-files-found: error
+  #         retention-days: 1
+  #         overwrite: true
 
     # load_wikigraph:
     #   runs-on: ubuntu-latest
