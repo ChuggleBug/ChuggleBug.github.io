@@ -105,10 +105,10 @@ jobs:
       #     run-id: ${{ steps.get-run-wikigraph.outputs.run_id }}
       #     github-token: ${{ secrets.GH_APP_LOAD_TOKEN }}
 
-      # - name: Upload Pages artifact
-      #   uses: actions/upload-pages-artifact@v5
-      #   with:
-      #     path: dist
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
 
   # Deploy Site
   deploy:
@@ -122,4 +122,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
