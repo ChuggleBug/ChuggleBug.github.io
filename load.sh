@@ -20,4 +20,4 @@ fi
 load_repo "blog" "${blog_url}"
 
 # Apps
-load_repo "wikigraph" https://github.com/ChuggleBug/test_repo.git
+load_repo "wikigraph" https://github.com/ChuggleBug/WikiGraph.git
