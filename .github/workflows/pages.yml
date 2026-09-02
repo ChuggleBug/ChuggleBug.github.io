@@ -97,7 +97,7 @@ jobs:
       - name: Load Blog
         uses: actions/download-artifact@v8.0.1
         with: 
-          repository: ChuggleBug/WikiGraph
+          repository: ChuggleBug/Blog
           name: dist
           path: ./dist/blog
           run-id: ${{ steps.get-run-blog.outputs.run_id }}
