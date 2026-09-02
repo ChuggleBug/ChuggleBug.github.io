@@ -68,6 +68,7 @@ jobs:
             --json databaseId \
             --jq '.[0].databaseId')
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
       - name: Run ID Wikigraph
         id: get-run-wikigraph
         env:
@@ -96,14 +97,14 @@ jobs:
           run-id: ${{ steps.get-run-blog.outputs.run_id }}
           github-token: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
 
-      # - name: Load Blog
-      #   uses: actions/download-artifact@v8.0.1
-      #   with: 
-      #     repository: ChuggleBug/Blog
-      #     name: dist
-      #     path: ./dist/blog
-      #     run-id: ${{ steps.get-run-blog.outputs.run_id }}
-      #     github-token: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
+      - name: Load WikiGraph
+        uses: actions/download-artifact@v8.0.1
+        with: 
+          repository: ChuggleBug/WikiGraph
+          name: dist
+          path: ./dist/blog
+          run-id: ${{ steps.get-run-wikigraph.outputs.run_id }}
+          github-token: ${{ secrets.GH_APP_LOAD_TOKEN }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -123,96 +124,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
-
-
-
-
-
-            
-
-
-        
-    
-      
-    
-
-  # load_blog:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Get Run ID
-  #       id: get-run
-  #       env:
-  #             GH_TOKEN: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
-  #       run: |
-  #         RUN_ID=$(gh run list \
-  #           --repo ChuggleBug/Blog \
-  #           --status success \
-  #           --limit 1 \
-  #           --json databaseId \
-  #           --jq '.[0].databaseId')
-  #         echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
-          
-  #     - name: Upload Blog Build Artifact 
-  #       uses: actions/download-artifact@v7
-  #       with:     
-  #         name: artifact
-  #         path: ./blog
-  #         if-no-files-found: error
-  #         retention-days: 1
-  #         overwrite: true
-
-    # load_wikigraph:
-    #   runs-on: ubuntu-latest
-    #   steps:
-    #     - name: Get Run ID (WikiGraph)
-    #       id: get-run
-    #       env:
-    #             GH_TOKEN: ${{ secrets.GH_APP_LOAD_TOKEN }}
-    #       run: |
-    #         RUN_ID=$(gh run list \
-    #           --repo ChuggleBug/WikiGraph \
-    #           --status success \
-    #           --limit 1 \
-    #           --json databaseId \
-    #           --jq '.[0].databaseId')
-    #         echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
-  # upload:
-  #   needs: [build_homepage, load_subprojects]
-  #   steps:
-      
-
-  
-
-
-
-#   # ----------------------------------------------
-#   # Let Pages handle it from here
-#   # ----------------------------------------------
-#   # Since we gave it Document Root, we can now
-#   # just tell it to deploy whatever we gave it
-#   # ----------------------------------------------
-
-# # # ----------------------------------------------
-#       # # Setup Ruby (required by Jekyll)
-#       # # ----------------------------------------------
-#       # # Software developed on ruby 3.4.1, so we use that
-#       # # Blog now lives in _work/blog after load.sh runs,
-#       # # so bundler-cache needs to point there.
-#       # # ----------------------------------------------
-#       # - name: Setup Ruby
-#       #   uses: ruby/setup-ruby@v1
-#       #   with:
-#       #     ruby-version: 3.3.1
-#       #     bundler-cache: true
-#       #     working-directory: _work/blog
-
-#       # # ----------------------------------------------
-#       # # Build everything
-#       # # ----------------------------------------------
-#       # # build.sh handles:
-#       # #   - homepage (npm run build -> dist/)
-#       # #   - blog (jekyll build -> dist/blog)
-#       # #   - wikigraph app (copy -> dist/app/wikigraph)
-#       # # ----------------------------------------------
-#       # - name: Build site
-#       #   run: ./build.sh
