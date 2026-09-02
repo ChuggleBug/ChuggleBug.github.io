@@ -5,8 +5,9 @@ name: Build and Deploy Website to GitHub Pages
 # In this case, this triggers on
 # "When main is pushed"
 on:
-  push:
-    branches: ["main"]
+  workflow_dispatch:
+  # push:
+  #   branches: ["main"]
 
 # Required permissions
 # - reading repo contents
