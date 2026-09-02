@@ -77,15 +77,13 @@ jobs:
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
           
       - name: Upload Blog Build Artifact 
-        parallel:
-          - name: artifact
-            uses: actions/download-artifact@v7
-            with:     
-              name: artifact
-              path: ./blog
-              if-no-files-found: error
-              retention-days: 1
-              overwrite: true
+        uses: actions/download-artifact@v7
+        with:     
+          name: artifact
+          path: ./blog
+          if-no-files-found: error
+          retention-days: 1
+          overwrite: true
 
     # load_wikigraph:
     #   runs-on: ubuntu-latest
