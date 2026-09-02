@@ -21,44 +21,17 @@ permissions:
 # If two pushes happen, cancel the
 # current running one
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 # Set of "Actions" to do
 jobs:
-  # Setup all static content
-  build:
+  build_homepage:
     runs-on: ubuntu-latest
-
     steps:
-
-      # -----------------------
-      # Tell GH Actions to get this repo
-      # -----------------------
-      - name: Checkout repository
+      - name: Checkout This repository
         uses: actions/checkout@v6
 
-      # ----------------------------------------------
-      # Load external projects (blog, wikigraph, etc)
-      # ----------------------------------------------
-      # This clones the external repos into _work/
-      # so downstream steps (bundler-cache, build.sh)
-      # can see them.
-      # ----------------------------------------------
-      - name: Make scripts executable
-        run: chmod +x load.sh build.sh
-
-      - name: Load external repos
-        env:
-          GH_BLOG_ACCESS_PAT: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
-        run: ./load.sh
-
-      # ----------------------------------------------
-      # Setup Node environment
-      # ----------------------------------------------
-      # install any dependencies inside
-      # package-lock
-      # ----------------------------------------------
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
@@ -66,64 +39,120 @@ jobs:
           cache: npm
           cache-dependency-path: src/homepage/package-lock.json
 
-      - name: Install Pages dependencies
+      - name: Install dependencies
         working-directory: src/homepage
         run: npm ci
 
-      # ----------------------------------------------
-      # Setup Ruby (required by Jekyll)
-      # ----------------------------------------------
-      # Software developed on ruby 3.4.1, so we use that
-      # Blog now lives in _work/blog after load.sh runs,
-      # so bundler-cache needs to point there.
-      # ----------------------------------------------
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Build Homepage
+        run: npm run build
+
+      - name: Upload Homepage Build Artifact
+        uses: actions/upload-artifact@v7
         with:
-          ruby-version: 3.3.1
-          bundler-cache: true
-          working-directory: _work/blog
-
-      # ----------------------------------------------
-      # Build everything
-      # ----------------------------------------------
-      # build.sh handles:
-      #   - homepage (npm run build -> dist/)
-      #   - blog (jekyll build -> dist/blog)
-      #   - wikigraph app (copy -> dist/app/wikigraph)
-      # ----------------------------------------------
-      - name: Build site
-        run: ./build.sh
-
+          name: artifact
+          path: ./
+          if-no-files-found: error
+          retention-days: 1
+          # Note: This repo should ensure that is does make subpaths to
+          # '/blog' and '/app/**'
+          overwrite: true
+    
       - name: Add .nojekyll
         run: touch dist/.nojekyll
 
-      # ----------------------------------------------
-      # Upload site to Pages
-      # ----------------------------------------------
-      # Because the website is built on 'dist',
-      # we have to tell GH Pages to look there
-      # ----------------------------------------------
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-  deploy:
-    needs: build
+  load_blog:
     runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
-      # ----------------------------------------------
-      # Let Pages handle it from here
-      # ----------------------------------------------
-      # Since we gave it Document Root, we can now
-      # just tell it to deploy whatever we gave it
-      # ----------------------------------------------
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: Get Run ID
+        id: get-run
+        env:
+              GH_TOKEN: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
+        run: |
+          RUN_ID=$(gh run list \
+            --repo ChuggleBug/Blog \
+            --status success \
+            --limit 1 \
+            --json databaseId \
+            --jq '.[0].databaseId')
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          
+      - name: Upload Blog Build Artifact 
+        parallel:
+          - name: artifact
+            uses: actions/download-artifact@v7
+            with:     
+              name: artifact
+              path: ./blog
+              if-no-files-found: error
+              retention-days: 1
+              overwrite: true
+
+    # load_wikigraph:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - name: Get Run ID (WikiGraph)
+    #       id: get-run
+    #       env:
+    #             GH_TOKEN: ${{ secrets.GH_APP_LOAD_TOKEN }}
+    #       run: |
+    #         RUN_ID=$(gh run list \
+    #           --repo ChuggleBug/WikiGraph \
+    #           --status success \
+    #           --limit 1 \
+    #           --json databaseId \
+    #           --jq '.[0].databaseId')
+    #         echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+  # upload:
+  #   needs: [build_homepage, load_subprojects]
+  #   steps:
+      
+
+  #     - name: Upload Pages artifact
+  #       uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: dist
+
+#   deploy:
+#     needs: upload
+#     runs-on: ubuntu-latest
+
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+
+#     steps:
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v5
+
+#   # ----------------------------------------------
+#   # Let Pages handle it from here
+#   # ----------------------------------------------
+#   # Since we gave it Document Root, we can now
+#   # just tell it to deploy whatever we gave it
+#   # ----------------------------------------------
+
+# # # ----------------------------------------------
+#       # # Setup Ruby (required by Jekyll)
+#       # # ----------------------------------------------
+#       # # Software developed on ruby 3.4.1, so we use that
+#       # # Blog now lives in _work/blog after load.sh runs,
+#       # # so bundler-cache needs to point there.
+#       # # ----------------------------------------------
+#       # - name: Setup Ruby
+#       #   uses: ruby/setup-ruby@v1
+#       #   with:
+#       #     ruby-version: 3.3.1
+#       #     bundler-cache: true
+#       #     working-directory: _work/blog
+
+#       # # ----------------------------------------------
+#       # # Build everything
+#       # # ----------------------------------------------
+#       # # build.sh handles:
+#       # #   - homepage (npm run build -> dist/)
+#       # #   - blog (jekyll build -> dist/blog)
+#       # #   - wikigraph app (copy -> dist/app/wikigraph)
+#       # # ----------------------------------------------
+#       # - name: Build site
+#       #   run: ./build.sh
