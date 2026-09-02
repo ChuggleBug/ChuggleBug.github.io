@@ -107,7 +107,7 @@ jobs:
           github-token: ${{ secrets.GH_APP_LOAD_TOKEN }}
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
