@@ -1,31 +1,22 @@
-# Name of action
+
 name: Build and Deploy Website to GitHub Pages
 
-# What "Action" will trigger this
-# In this case, this triggers on
-# "When main is pushed"
 on:
   workflow_dispatch:
   # push:
   #   branches: ["main"]
 
-# Required permissions
-# - reading repo contents
-# - writing to Pages environment
-# - token??? (required to function)
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# If two pushes happen, cancel the
-# current running one
 concurrency:
   group: pages
   cancel-in-progress: true
 
-# Set of "Actions" to do
 jobs:
+  # Builds src/homepage
   build_homepage:
     runs-on: ubuntu-latest
     steps:
@@ -58,6 +49,8 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
+  # Merges homepage artifact, blog
+  # and all specified web applications
   link_apps:
     needs: build_homepage
     runs-on: ubuntu-latest
@@ -75,18 +68,18 @@ jobs:
             --json databaseId \
             --jq '.[0].databaseId')
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
-        # - name: Run ID Wikigraph
-        #   id: get-run-wikigraph
-        #   env:
-        #     GH_TOKEN: ${{ secrets.GH_APP_LOAD_TOKEN }}
-        #   run: |
-        #     RUN_ID=$(gh run list \
-        #       --repo ChuggleBug/Wikigraph \
-        #       --status success \
-        #       --limit 1 \
-        #       --json databaseId \
-        #       --jq '.[0].databaseId')
-        #     echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+      - name: Run ID Wikigraph
+        id: get-run-wikigraph
+        env:
+          GH_TOKEN: ${{ secrets.GH_APP_LOAD_TOKEN }}
+        run: |
+          RUN_ID=$(gh run list \
+            --repo ChuggleBug/Wikigraph \
+            --status success \
+            --limit 1 \
+            --json databaseId \
+            --jq '.[0].databaseId')
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
 
       - name: Load Homepage
         uses: actions/download-artifact@v8.0.1
@@ -103,8 +96,33 @@ jobs:
           run-id: ${{ steps.get-run-blog.outputs.run_id }}
           github-token: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
 
+      # - name: Load Blog
+      #   uses: actions/download-artifact@v8.0.1
+      #   with: 
+      #     repository: ChuggleBug/Blog
+      #     name: dist
+      #     path: ./dist/blog
+      #     run-id: ${{ steps.get-run-blog.outputs.run_id }}
+      #     github-token: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
 
-            
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  # Deploy Site
+  deploy:
+    needs: link_apps
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
 
 
 
@@ -163,23 +181,9 @@ jobs:
   #   steps:
       
 
-  #     - name: Upload Pages artifact
-  #       uses: actions/upload-pages-artifact@v3
-  #       with:
-  #         path: dist
+  
 
-#   deploy:
-#     needs: upload
-#     runs-on: ubuntu-latest
 
-#     environment:
-#       name: github-pages
-#       url: ${{ steps.deployment.outputs.page_url }}
-
-#     steps:
-#       - name: Deploy to GitHub Pages
-#         id: deployment
-#         uses: actions/deploy-pages@v5
 
 #   # ----------------------------------------------
 #   # Let Pages handle it from here
