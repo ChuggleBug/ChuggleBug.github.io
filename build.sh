@@ -35,5 +35,7 @@ mkdir -p ${APP_ROOT}
 
 # Wikigraph (test)
 cd _work/wikigraph
-cp -r . "${APP_ROOT}/wikigraph"
+npm ci
+npm run build
+mv dist "${APP_ROOT}/wikigraph"
 cd ${PROJ_ROOT}
