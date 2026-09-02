@@ -86,7 +86,7 @@ export function ToyElementMobile({ toy }: ToyEmenentProps) {
 
     return (
         <ClickAwayListener onClickAway={() => (setFlipped(false))}>
-            <div className="w-fit h-fit" onClick={() => setFlipped(!flipped)}>
+            <div onClick={() => setFlipped(!flipped)}>
                 <div className={`glass-panel toy-element-mobile ${flipped ? 'rotate-y-180 flipped' : ''} flex flex-col items-center-safe`}>
                     <div className={`h-250 w-fit max-h-250 rounded flex justify-center pb-2 ${flipped ? '-rotate-y-180' : ''}`}>
                         {/* Show demo gif is there is one */}
@@ -99,7 +99,7 @@ export function ToyElementMobile({ toy }: ToyEmenentProps) {
 
                     </div>
 
-                    <div className="h-fit w-fit toy-element-mobile-content relative">
+                    <div className="h-full w-full toy-element-mobile-content relative">
                         <div className={`${flipped ? 'opacity-0' : 'opacity-100'}`}>
                             <p className="toy-title text-left w-full pb-1">{toy.title.replace('_', ' ')}</p>
                             <p>{toy.description}</p>
