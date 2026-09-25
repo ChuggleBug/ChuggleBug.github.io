@@ -96,14 +96,14 @@ jobs:
           run-id: ${{ steps.get-run-blog.outputs.run_id }}
           github-token: ${{ secrets.GH_BLOG_LOAD_TOKEN }}
 
-      # - name: Load WikiGraph
-      #   uses: actions/download-artifact@v8.0.1
-      #   with: 
-      #     repository: ChuggleBug/WikiGraph
-      #     name: dist
-      #     path: ./dist/app/wikigraph
-      #     run-id: ${{ steps.get-run-wikigraph.outputs.run_id }}
-      #     github-token: ${{ secrets.GH_APP_LOAD_TOKEN }}
+      - name: Load WikiGraph
+        uses: actions/download-artifact@v8.0.1
+        with: 
+          repository: ChuggleBug/WikiGraph
+          name: dist
+          path: ./dist/app/wikigraph
+          run-id: ${{ steps.get-run-wikigraph.outputs.run_id }}
+          github-token: ${{ secrets.GH_APP_LOAD_TOKEN }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
