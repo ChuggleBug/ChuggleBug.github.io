@@ -1,3 +1,4 @@
+"use client";
 
 import { useState, useEffect } from "react";
 
@@ -10,13 +11,16 @@ function getWindowDimensions() {
 }
 
 export default function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+  // window is undefined during server rendering, so start at 0 and
+  // read the real size after mount to keep hydration consistent
+  const [windowDimensions, setWindowDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     function handleResize() {
       setWindowDimensions(getWindowDimensions());
     }
 
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);

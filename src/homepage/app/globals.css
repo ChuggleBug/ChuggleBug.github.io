@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* Shared component styles (ported from homepage_old/src/styles) */
+@import "./_styles/glass-button.css";
+@import "./_styles/sidebar.css";
+@import "./_styles/star-control.css";
+@import "./_styles/star-cover.css";
+@import "./_styles/toy-element.css";
+
+:root {
+  --font-geist-sans: "Geist Sans", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+}
+
 @theme {
   /* Colors */
   --color-background: #0C090A;
@@ -13,7 +25,6 @@
 
   /* Text */
   --color-light: #F5F5F5;
-  /* --color-dark: #abcdef; */
 
   /* Fonts */
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
@@ -22,7 +33,9 @@
 
 /* Base styles */
 body {
-  @apply bg-background text-foreground font-sans;
+  /* background: var(--color-background); */
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
 }
 
 .glass-card {
