@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @import "./_styles/glass.css";
-@import "./_styles/sidebar.css";
+@import "./_styles/navigator.css";
 @import "./_styles/star-control.css";
 @import "./_styles/star-cover.css";
 @import "./_styles/toy-element.css";
