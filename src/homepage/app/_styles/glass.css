@@ -11,7 +11,8 @@
   backdrop-filter: blur(10px);
 }
 
-.glass-button {
+button.glass {
+  
   display: inline-block;
   border: 0;
   text-decoration: none;
@@ -34,7 +35,15 @@
   font-weight: bold;
 }
 
-/* .glass-button:active, */
-.glass-button:hover {
+button.glass[aria-label="text"] {
+  min-width: calc(var(--spacing) * 20);
+  padding: calc(var(--spacing) * 3) 0;
+}
+
+button.glass[aria-label="icon"] {
+  padding: calc(var(--spacing) * 2);
+}
+
+button.glass:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }

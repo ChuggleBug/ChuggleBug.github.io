@@ -1,8 +1,8 @@
-@import "tailwindcss";
-
 @theme {
     --sidebar-width: 25dvh
 }
+
+
 
 .sidebar {
     background-color: var(--color-background);
@@ -29,7 +29,7 @@
     visibility: hidden;
 }
 
-.sidebar-blur.show {
+.sidebar-blur--show {
     backdrop-filter: blur(4px);
     opacity: 1;
     visibility: visible;

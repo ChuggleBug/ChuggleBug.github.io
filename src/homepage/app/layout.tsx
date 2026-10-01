@@ -5,7 +5,7 @@ import ParticlesBackground from './_components/ParticleBackground';
 import App from 'next/app';
 import AppNavigator from './_components/AppNavigator';
 import { useNavStore } from './_lib/useNavStore';
- 
+
 export default function RootLayout({
   children,
 }: {
@@ -19,17 +19,21 @@ export default function RootLayout({
       <meta name="description" content="Web site created with Next.js." />
       <body>
 
-        <div className="fixed right-0">{navStore.open ? 'Open' : 'Closed'}</div>
-        <AppNavigator 
-          open={navStore.open} 
-          onToggle={navStore.onToggle} 
-          onClose={navStore.onClose} 
-        />
+        <div className="sticky w-fit top-5 left-5 md:top-10 md:left-10 z-20">
+          <AppNavigator
+            open={navStore.open}
+            onToggle={navStore.onToggle}
+            onClose={navStore.onClose}
+          />
+        </div>
         {/* Blur Layer for the navigator */}
-        <div className={`fixed z-10 inset-0 w-screen h-screen sidebar-blur ${navStore.open ? `show` : ``} `} onClick={() => navStore.onClose()}></div>
+        <div className={`fixed inset-0 w-screen h-screen sidebar-blur ${navStore.open ? `sidebar-blur--show` : ``} `} onClick={() => navStore.onClose()}></div>
 
-        <ParticlesBackground/>
         <div id="root">{children}</div>
+
+        <div className="fixed -z-10">
+          <ParticlesBackground />
+        </div>
       </body>
     </html>
   )

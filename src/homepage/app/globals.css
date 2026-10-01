@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
-/* Shared component styles (ported from homepage_old/src/styles) */
-@import "./_styles/glass-button.css";
+@import "./_styles/glass.css";
 @import "./_styles/sidebar.css";
 @import "./_styles/star-control.css";
 @import "./_styles/star-cover.css";
@@ -33,19 +32,9 @@
 
 /* Base styles */
 body {
-  /* background: var(--color-background); */
+  background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
-}
-
-.glass-card {
-  /* From https://css.glass */
-  background: rgba(171, 171, 171, 0.20);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.27);
-  border-radius: 10px;
 }
 
 h1 {
