@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Builds src/homepage
+  # Builds homepage
   build_homepage:
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: src/homepage/package-lock.json
+          cache-dependency-path: src/package-lock.json
 
       - name: Install dependencies
         working-directory: src
