@@ -1,4 +1,8 @@
-"use client";
+// Do not add "use client" here
+// add it in the file that uses this
+// in general, this is used when a cursor
+// is not availible, or just for performance,
+// not for css media
 
 import { useSyncExternalStore } from "react";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import "../globals.css"
 
 import TOYS from "./_lib/toy-data";
