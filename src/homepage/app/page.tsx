@@ -18,7 +18,7 @@ export default function Home() {
                 et lobortis massa enim eu orci. Integer eget porttitor est
               </p>
             </div>
-            <div className="overflow-hidden rounded w-[500px] h-[300px] flex items-center justify-center">
+            <div className="overflow-hidden rounded min-w-[250px] max-w-[500px] max-h-[150px] max-h-[300px] flex items-center justify-center">
               <Image
                 className="w-full h-full object-contain"
                 src={homepageImage}
