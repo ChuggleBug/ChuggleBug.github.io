@@ -37,7 +37,7 @@ function ToyImage({ title, showDemo }: ToyImageProps) {
                 loading="eager"
             />
             {demoLoaded &&
-                <Image className={`absolute inset-0 overflow-clip rounded select-none ${showDemo ? 'visible' : 'invisible'}`}
+                <Image className={`absolute inset-0 overflow-clip rotate-y-180 rounded select-none ${showDemo ? 'visible' : 'invisible'}`}
                     height={200}
                     width={250}
                     src={getDemo(title)}
