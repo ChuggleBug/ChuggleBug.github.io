@@ -1,6 +1,8 @@
 /* Styles from https://codepen.io/kanishkkunal/pen/QWGzBwz */
 
-.glass-panel {
+
+.glass-panel,
+.glass-panel-content {
   color: #fff;
   /* margin: 40px auto; */
   background-color: rgba(255, 255, 255, 0.06);
@@ -9,6 +11,13 @@
   border-radius: 15px;
   /* padding: 32px; */
   backdrop-filter: blur(10px);
+}
+
+.glass-panel-content {
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--spacing) * 10);
+  text-align: left;
 }
 
 button.glass {
