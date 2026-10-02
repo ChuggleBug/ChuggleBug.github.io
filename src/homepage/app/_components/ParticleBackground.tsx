@@ -1,22 +1,26 @@
 "use client";
 
-import { Particles, ParticlesProvider } from "@tsparticles/react";
+import { ParticlesProvider, Particles } from "@tsparticles/react";
+import { useCallback, useSyncExternalStore } from "react";
 import { loadSlim } from "@tsparticles/slim";
-import { useCallback, useMemo } from "react";
-import type { Container, Engine, ISourceOptions } from "@tsparticles/engine";
+import { type Engine, type Container } from "@tsparticles/engine";
+
+import { getParticleOptions, setParticlesContainer, subscribeParticleOptions } from "../_lib/particle-control";
 import { defaultParticleOptions } from "../_lib/default-particle";
 
-// Must be defined outside the component: ParticlesProvider requires a stable init callback.
 const particlesInit = async (engine: Engine) => {
   await loadSlim(engine);
 };
 
-export default function ParticlesBackground() {
+export default function ParticleBackground() {
+  const options = useSyncExternalStore(subscribeParticleOptions, getParticleOptions, () => defaultParticleOptions);
+
   const particlesLoaded = useCallback(async (container?: Container) => {
+    if (container) {
+      setParticlesContainer(container);
+    }
   }, []);
 
-  const options: ISourceOptions = useMemo(() => {
-    return defaultParticleOptions}, []);
 
   return (
     <ParticlesProvider init={particlesInit}>
