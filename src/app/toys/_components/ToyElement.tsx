@@ -21,17 +21,30 @@ type ToyImageProps = {
 }
 
 // Shows the thumbnail, or the demo gif when showDemo is set.
-// Falls back to the thumbnail if there is no demo, and to a gray
-// placeholder if there is no thumbnail (in which case there's no demo either)
 function ToyImage({ title, showDemo }: ToyImageProps) {
+    const [demoLoaded, setDemoLoaded] = useState<boolean>(false);
+    if (showDemo && !demoLoaded) {
+        setDemoLoaded(true);
+    }
+
     return (
-        <Image className="overflow-clip rounded select-none"
-            height={200}
-            width={250}
-            src={showDemo ? getDemo(title) : getThumbnail(title)}
-            alt={`Thumbnail for the ${title} toy`}
-            loading="eager"
-        />
+        <div className="relative">
+            <Image className="overflow-clip rounded select-none"
+                height={200}
+                width={250}
+                src={getThumbnail(title)}
+                alt={`Thumbnail for the ${title} toy`}
+                loading="eager"
+            />
+            {demoLoaded &&
+                <Image className={`absolute inset-0 overflow-clip rounded select-none ${showDemo ? 'visible' : 'invisible'}`}
+                    height={200}
+                    width={250}
+                    src={getDemo(title)}
+                    alt={`Demo for the ${title} toy`}
+                    loading="eager"
+                />}
+        </div>
     );
 }
 
