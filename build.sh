@@ -19,7 +19,7 @@ PROJ_ROOT=`realpath .`
 ##############################
 # Personal website project
 ##############################
-cd src/homepage
+cd src
 npm run build
 mv dist ${PROJ_ROOT}
 cd ${PROJ_ROOT}
