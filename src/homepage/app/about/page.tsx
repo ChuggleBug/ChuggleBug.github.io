@@ -4,9 +4,9 @@ import "../globals.css";
 export default function About() {
     return (
         <div className="lg:px-20 p-10">
-            <div className="flex flex-col glass-panel p-10">
+            <div className="glass-panel-content">
                 <h2>About</h2>
-                <p className="text-left">
+                <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing
                     elit. Aenean non sagittis ipsum. Mauris ac nisl a
                     purus viverra posuere vel sit amet lorem. Morbi interdum
