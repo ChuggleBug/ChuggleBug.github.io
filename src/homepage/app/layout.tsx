@@ -19,7 +19,7 @@ export default function RootLayout({
       <meta name="description" content="Web site created with Next.js." />
       <body suppressHydrationWarning>
 
-        <div className="sticky w-fit top-10 md:top-5 left-5 md:left-10 mt-5 md:mt-10  z-20">
+        <div className="sticky w-fit top-5 md:top-10 left-5 md:left-10 md:mt-5 z-20">
           <AppNavigator
             open={navStore.open}
             onToggle={navStore.onToggle}
