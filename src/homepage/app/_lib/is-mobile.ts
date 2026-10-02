@@ -1,3 +1,5 @@
+"use client";
+
 import { useSyncExternalStore } from "react";
 
 // Wrapper for react-device-detect (since it does not work with next)
