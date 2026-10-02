@@ -5,6 +5,11 @@ if [[ ! -d _work ]]; then
     exit 1
 fi
 
+if [[ "${1}" == "--quick" ]]; then
+    echo "Skipping blog and app builds."
+    BUILD_QUICK=1
+fi
+
 if [[ -d dist ]]; then
     rm -rf dist
 fi
@@ -18,6 +23,10 @@ cd src/homepage
 npm run build
 mv dist ${PROJ_ROOT}
 cd ${PROJ_ROOT}
+
+if [[ $BUILD_QUICK -eq 1 ]]; then
+    exit 0
+fi
 
 ###############
 # Blog site
