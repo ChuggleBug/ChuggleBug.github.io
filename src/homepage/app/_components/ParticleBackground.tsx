@@ -12,7 +12,6 @@ const particlesInit = async (engine: Engine) => {
 
 export default function ParticlesBackground() {
   const particlesLoaded = useCallback(async (container?: Container) => {
-    console.log("Particles loaded", container);
   }, []);
 
   const options: ISourceOptions = useMemo(() => {
