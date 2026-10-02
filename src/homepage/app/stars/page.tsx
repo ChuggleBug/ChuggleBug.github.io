@@ -5,11 +5,12 @@ import "../globals.css"
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import defaultParticleOptions from '../_lib/default-particle';
+import defaultParticleOptions, { DEFAULT_STAR_COUNT } from '../_lib/default-particle';
 import { getParticleContainer, setParticleOptions } from '../_lib/particle-control';
 import { FaAngleDown } from "react-icons/fa";
 import { type Container, type Particle } from "@tsparticles/engine"
 import useWindowDimensions from "../_lib/useWindowDimensions";
+import { useIsMobile } from "../_lib/is-mobile";
 
 
 function handleChangeWrapper(cb: (c: Container, v: number) => void) {
@@ -62,7 +63,11 @@ export default function Stars() {
     const { width, height } = useWindowDimensions();
 
     const [flickerRate, setFlickerRate] = useState<number>(1);
-    const [starCount, setStarCount] = useState<number>(defaultParticleOptions.particles.number.value);
+    const isMobile = useIsMobile();
+    // null until the user touches the slider, so the shown default follows
+    // the hydration-safe isMobile instead of the module-level constant
+    const [starCountState, setStarCount] = useState<number | null>(null);
+    const starCount = starCountState ?? (isMobile ? DEFAULT_STAR_COUNT.mobile : DEFAULT_STAR_COUNT.desktop);
     const [starSpeed, setStarSpeed] = useState<number>(1);
     const [menuOpen, setMenuOpen] = useState<boolean>(true);
 

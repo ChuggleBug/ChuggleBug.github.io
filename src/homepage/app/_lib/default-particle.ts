@@ -3,12 +3,14 @@ import { isMobile } from './is-mobile';
 
 export type ParticleOptions = any;
 
+export const DEFAULT_STAR_COUNT = { mobile: 250, desktop: 500 };
+
 export const defaultParticleOptions = {
   "fpsLimit": isMobile ? 30 : 60,
   "detectRetina": !isMobile,
   "particles": {
     "number": {
-      "value": isMobile ? 250 : 500,
+      "value": isMobile ? DEFAULT_STAR_COUNT.mobile : DEFAULT_STAR_COUNT.desktop,
     },
     "color": {
       "value": "#ffffff"
