@@ -1,21 +1,15 @@
-"use client";
-
 import "../globals.css"
 
 import TOYS from "./_lib/toy-data";
 import { ToyElement, ToyElementMobile } from "./_components/ToyElement";
-import { isMobile } from "react-device-detect";
-import { useSyncExternalStore } from "react";
-
-const noopSubscribe = () => () => {};
+import { isMobile } from "../_lib/is-mobile";
 
 export default function Toys() {
 
     // Figure what container to 
     // use since mobile doesnt have mouse
     // and will need some other style.
-    const mobile = useSyncExternalStore(noopSubscribe, () => isMobile, () => false);
-    const EvalutatedToyElement = mobile ? ToyElementMobile : ToyElement;
+    const EvalutatedToyElement = isMobile ? ToyElementMobile : ToyElement;
 
     return (
         <div className="flex flex-col gap-5 px-5 lg:px-20 py-10">
