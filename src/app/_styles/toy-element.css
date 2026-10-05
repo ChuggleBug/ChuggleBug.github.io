@@ -15,9 +15,9 @@
 }
 
 .toy-element-mobile.flipped {
-    -webkit-box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
+    -moz-box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
+    box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
 }
 
 .toy-element-mobile-content {
@@ -26,9 +26,9 @@
 
 .toy-element:hover {
     transform: translateY(-2px) translateX(1px);
-    -webkit-box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
+    -moz-box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
+    box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
     cursor: pointer;
 }
 
