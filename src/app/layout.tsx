@@ -4,8 +4,6 @@ import './globals.css'
 import ParticlesBackground from './_components/ParticleBackground';
 import AppNavigator from './_components/AppNavigator';
 import { useNavStore } from './_lib/useNavStore';
-import favicon from '../public/favicon.svg'
-
 
 export default function RootLayout({
   children,
@@ -16,10 +14,10 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <link rel="icon" type="image/svg+xml" href={favicon.src} />
       <title>Jacob Gutierrez's Site</title>
       <meta name="description" content="Web site created with Next.js." />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="apple-mobile-web-app-title" content="ChuggleBug" />
       <body suppressHydrationWarning>
 
         <div className="sticky w-fit top-5 md:top-10 left-5 md:left-10 mt-5 md:mt-10 z-20">
