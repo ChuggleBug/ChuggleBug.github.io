@@ -4,9 +4,10 @@ import "../globals.css"
 
 import TOYS from "./_lib/toy-data";
 import { ToyElement, ToyElementMobile } from "./_components/ToyElement";
-import { isMobile } from "../_lib/is-mobile";
+import { useIsMobile } from "../_lib/is-mobile";
 
 export default function Toys() {
+    const isMobile = useIsMobile();
 
     // Figure what container to 
     // use since mobile doesnt have mouse
@@ -19,15 +20,15 @@ export default function Toys() {
                 <div>
                     <h2>Toys That I've Made</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Aenean non sagittis ipsum. Mauris ac nisl a
-                        purus viverra posuere vel sit amet lorem.
+                        To me, a "toy" is some web app that doesn't really do much but is complete enough to be
+                        shared publicly to show something off.
+                        
                     </p>
                 </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-between">
                 {TOYS.map((t, _) => {
-                    return <EvalutatedToyElement key={t.title} toy={t} />;
+                    return <EvalutatedToyElement key={t.title} toy={t}/>;
                 })}
             </div>
 
