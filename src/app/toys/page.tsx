@@ -21,7 +21,7 @@ export default function Toys() {
                     <h2>Toys That I've Made</h2>
                     <p>
                         To me, a "toy" is some web app that doesn't really do much but is complete enough to be
-                        shared publicly to show something off.
+                        shared publicly to show something off. Go check out the ones I have shared here.
                         
                     </p>
                 </div>

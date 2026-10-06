@@ -27,7 +27,7 @@ export const TOYS: ReadonlyArray<Toy> = [
     },
     {
         title: "WikiGraph",
-        description: "Template",
+        description: "Wikipedia is a highly connected article database, so I made it into a explorable graph.",
         webPath: "/app/wikigraph",
     },
 ];
