@@ -32,6 +32,7 @@ fi
 # Blog site
 ###############
 cd _work/blog
+bundle install
 bundle exec jekyll build
 mv _site "${PROJ_ROOT}/dist/blog"
 cd ${PROJ_ROOT}

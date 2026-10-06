@@ -5,6 +5,7 @@ import { type Toy } from "../_lib/toy-data";
 import Link from "next/link";
 import Image from "next/image";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import { useIsMobile } from "@/app/_lib/is-mobile";
 
 // Assets are served statically from public/toys/<title>/
 function getThumbnail(title: string) {
@@ -22,6 +23,7 @@ type ToyImageProps = {
 
 // Shows the thumbnail, or the demo gif when showDemo is set.
 function ToyImage({ title, showDemo }: ToyImageProps) {
+    const isMobile = useIsMobile();
     const [demoLoaded, setDemoLoaded] = useState<boolean>(false);
     if (showDemo && !demoLoaded) {
         setDemoLoaded(true);
@@ -37,7 +39,7 @@ function ToyImage({ title, showDemo }: ToyImageProps) {
                 loading="eager"
             />
             {demoLoaded &&
-                <Image className={`absolute inset-0 overflow-clip rotate-y-180 rounded select-none ${showDemo ? 'visible' : 'invisible'}`}
+                <Image className={`absolute inset-0 overflow-clip rounded select-none ${showDemo ? 'visible' : 'invisible'} ${isMobile ? 'rotate-y-180' : ''}`}
                     height={200}
                     width={250}
                     src={getDemo(title)}
