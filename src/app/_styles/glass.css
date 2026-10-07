@@ -20,8 +20,9 @@
   text-align: left;
 }
 
+
+button.glass-dark,
 button.glass {
-  
   display: inline-block;
   border: 0;
   text-decoration: none;
@@ -43,15 +44,26 @@ button.glass {
   font-weight: bold;
 }
 
+button.glass-dark {
+  background-color: color-mix(rgba(255, 255, 255, 0.1) 50%, #000000 50%);
+  border: 1px solid color-mix(rgba(255, 255, 255, 0.1) 90%, #000000 10%);
+}
+
+button.glass-dark[aria-label="text"],
 button.glass[aria-label="text"] {
   min-width: calc(var(--spacing) * 20);
   padding: calc(var(--spacing) * 3) 0;
 }
 
+button.glass-dark[aria-label="icon"],
 button.glass[aria-label="icon"] {
   padding: calc(var(--spacing) * 2);
 }
 
 button.glass:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+button.glass-dark:hover {
+  background-color: color-mix(rgba(255, 255, 255, 0.2) 50%, #000000 50%);
 }

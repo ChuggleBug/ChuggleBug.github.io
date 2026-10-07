@@ -95,16 +95,16 @@ export function ToyElementMobile({ toy }: ToyEmenentProps) {
     const [flipped, setFlipped] = useState<boolean>(false);
 
     const NavButton = (
-        <div className="toy-element-mobile-button p-2">
+        <button className="glass-dark toy-element-mobile-button" aria-label='text'>
             {(toy.useReactLink ?? false) ?
-                <Link href={toy.webPath}>
+                <Link className="text-2xl" href={toy.webPath}>
                     Go!
                 </Link>
                 :
-                <a href={toy.webPath}>
+                <a  className="text-2xl" href={toy.webPath}>
                     Go!
                 </a>}
-        </div>
+        </button>
     );
 
     return (
