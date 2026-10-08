@@ -2,8 +2,6 @@
     --sidebar-width: 25dvh
 }
 
-
-
 .sidebar {
     background-color: var(--color-background);
     /* background-color: #ffffff; */
@@ -17,22 +15,24 @@
 
 .sidebar.open {
     left: 0px;
-    -webkit-box-shadow: 10px 0px 25px var(--color-background);
+     -webkit-box-shadow: 10px 0px 25px var(--color-background);
     -moz-box-shadow: 10px 0px 25px var(--color-background);
     box-shadow: 10px 0px 25px var(--color-background);
 }
 
 .sidebar-blur {
-    transition: all 0.2s;
-    backdrop-filter: blur(0px);
+    transition: all 0.1s;
     opacity: 0;
     visibility: hidden;
 }
 
 .sidebar-blur--show {
-    backdrop-filter: blur(4px);
     opacity: 1;
     visibility: visible;
+}
+
+.sidebar-blur--blur {
+    backdrop-filter: blur(4px);
 }
 
 .sidebar-element {
