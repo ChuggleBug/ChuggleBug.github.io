@@ -1,5 +1,5 @@
 @theme {
-    --sidebar-width: 25dvh
+    --sidebar-width: 25dvh;
 }
 
 .sidebar {
@@ -15,7 +15,7 @@
 
 .sidebar.open {
     left: 0px;
-     -webkit-box-shadow: 10px 0px 25px var(--color-background);
+    -webkit-box-shadow: 10px 0px 25px var(--color-background);
     -moz-box-shadow: 10px 0px 25px var(--color-background);
     box-shadow: 10px 0px 25px var(--color-background);
 }
@@ -41,5 +41,9 @@
 }
 
 .sidebar-element:hover {
-    background-color: color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%)
+    background-color: color-mix(
+        in srgb,
+        var(--color-background) 80%,
+        #ffffff 20%
+    );
 }

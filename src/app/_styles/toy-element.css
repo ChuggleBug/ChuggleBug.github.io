@@ -15,9 +15,12 @@
 }
 
 .toy-element-mobile.flipped {
-    -webkit-box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
-    -moz-box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
-    box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
+    -webkit-box-shadow: 0px 0px 10px 1px
+        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
+    -moz-box-shadow: 0px 0px 10px 1px
+        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
+    box-shadow: 0px 0px 10px 1px
+        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
 }
 
 .toy-element-mobile-content {
@@ -25,18 +28,19 @@
 }
 
 .toy-element:hover {
-    -webkit-box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
-    -moz-box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
-    box-shadow: 0px 0px 10px 1px color-mix(in srgb, var(--color-background) 80%, #FFFFFF 20%);
+    -webkit-box-shadow: 0px 0px 10px 1px
+        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
+    -moz-box-shadow: 0px 0px 10px 1px
+        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
+    box-shadow: 0px 0px 10px 1px
+        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
     cursor: pointer;
 }
-
 
 .toy-title {
     font-size: 1.5rem;
     font-weight: bold;
 }
-
 
 /* Some attributes derrived from glass-button and sidebar-button */
 .toy-element-mobile-button {

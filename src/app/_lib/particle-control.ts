@@ -1,13 +1,15 @@
-
-import { defaultParticleOptions, type ParticleOptions } from "./default-particle";
-import { type Container } from "@tsparticles/engine"
+import {
+    defaultParticleOptions,
+    type ParticleOptions,
+} from "./default-particle";
+import { type Container } from "@tsparticles/engine";
 
 type Listener = () => void;
 
 let particleOptions: ParticleOptions = defaultParticleOptions;
 const listeners = new Set<Listener>();
 
-export function getParticleOptions(){
+export function getParticleOptions() {
     return particleOptions;
 }
 

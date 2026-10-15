@@ -1,27 +1,27 @@
 "use client";
 
-import "../globals.css"
+import "../globals.css";
 
 import TOYS from "./_lib/toy-data";
 import { ToyElement, ToyElementMobile } from "./_components/ToyElement";
 import { useIsMobile } from "../_lib/is-mobile";
 import { useEffect, useState } from "react";
-import { getAPIStatus, StatusReport } from "@/app/_lib/api"
+import { getAPIStatus, StatusReport } from "@/app/_lib/api";
 
 export default function Toys() {
     const isMobile = useIsMobile();
 
-    const [apiStatus, setApiStatus] = useState<StatusReport | null>(null)
+    const [apiStatus, setApiStatus] = useState<StatusReport | null>(null);
 
     useEffect(() => {
         async function fetch_data() {
-            const status = await getAPIStatus()
-            setApiStatus(status)   
+            const status = await getAPIStatus();
+            setApiStatus(status);
         }
-        fetch_data()
-    },[]);
+        fetch_data();
+    }, []);
 
-    // Figure what container to 
+    // Figure what container to
     // use since mobile doesnt have mouse
     // and will need some other style.
     const EvalutatedToyElement = isMobile ? ToyElementMobile : ToyElement;
@@ -32,18 +32,26 @@ export default function Toys() {
                 <div>
                     <h2>Toys That I've Made</h2>
                     <p>
-                        To me, a "toy" is some web app that doesn't really do much but is complete enough to be
-                        shared publicly to show something off. Go check out the ones I have shared here.
-                        
+                        To me, a "toy" is some web app that doesn't really do
+                        much but is complete enough to be shared publicly to
+                        show something off. Go check out the ones I have shared
+                        here.
                     </p>
                 </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-between">
-                {TOYS.map((t, _) => {
-                    return <EvalutatedToyElement key={t.displayName} toy={t} serviceStatus={apiStatus ? apiStatus[t.internalName] : null} />;
+                {TOYS.map((t) => {
+                    return (
+                        <EvalutatedToyElement
+                            key={t.displayName}
+                            toy={t}
+                            serviceStatus={
+                                apiStatus ? apiStatus[t.internalName] : null
+                            }
+                        />
+                    );
                 })}
             </div>
-
         </div>
     );
 }

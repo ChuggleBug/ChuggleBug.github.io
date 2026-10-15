@@ -1,26 +1,30 @@
 "use client";
 
-import "../globals.css"
+import "../globals.css";
 
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-import defaultParticleOptions, { DEFAULT_STAR_COUNT } from '../_lib/default-particle';
-import { getParticleContainer, setParticleOptions } from '../_lib/particle-control';
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import defaultParticleOptions, {
+    DEFAULT_STAR_COUNT,
+} from "../_lib/default-particle";
+import {
+    getParticleContainer,
+    setParticleOptions,
+} from "../_lib/particle-control";
 import { FaAngleDown } from "react-icons/fa";
-import { type Container, type Particle } from "@tsparticles/engine"
+import { type Container, type Particle } from "@tsparticles/engine";
 import useWindowDimensions from "../_lib/useWindowDimensions";
 import { useIsMobile } from "../_lib/is-mobile";
 
-
 function handleChangeWrapper(cb: (c: Container, v: number) => void) {
     return (_: React.SyntheticEvent | Event, value: number | number[]) => {
-        let c = getParticleContainer();
+        const c = getParticleContainer();
 
         if (typeof value === "number" && c) {
-            cb(c, value)
+            cb(c, value);
         }
-    }
+    };
 }
 
 function applyParticleSpeedFactor(particle: Particle, factor: number) {
@@ -47,7 +51,7 @@ function applyParticleSpeedFactor(particle: Particle, factor: number) {
 function applyParticleFlickerFactor(particle: Particle, factor: number) {
     // Basic presence check (shouldn't happen here)
     if (particle.opacity?.velocity === undefined) {
-        return
+        return;
     }
 
     // Track initial velocity upon first invocation with this particle
@@ -67,12 +71,16 @@ export default function Stars() {
     // null until the user touches the slider, so the shown default follows
     // the hydration-safe isMobile instead of the module-level constant
     const [starCountState, setStarCount] = useState<number | null>(null);
-    const starCount = starCountState ?? (isMobile ? DEFAULT_STAR_COUNT.mobile : DEFAULT_STAR_COUNT.desktop);
+    const starCount =
+        starCountState ??
+        (isMobile ? DEFAULT_STAR_COUNT.mobile : DEFAULT_STAR_COUNT.desktop);
     const [starSpeed, setStarSpeed] = useState<number>(1);
     const [menuOpen, setMenuOpen] = useState<boolean>(true);
 
     const appliedFlickerRef = useRef<number>(1);
-    const appliedCountRef = useRef<number>(defaultParticleOptions.particles.number.value);
+    const appliedCountRef = useRef<number>(
+        defaultParticleOptions.particles.number.value,
+    );
     const appliedSpeedRef = useRef<number>(1);
 
     const SPMainRef = useRef<HTMLDivElement>(null);
@@ -83,46 +91,45 @@ export default function Stars() {
         const SPMainHeight = SPMainRef.current?.clientHeight ?? 0;
         const SPToggleHeight = SPToggleRef.current?.clientHeight ?? 0;
         setSPMainStyle({
-            transform: `translateY(${SPMainHeight - SPToggleHeight}px)`
+            transform: `translateY(${SPMainHeight - SPToggleHeight}px)`,
         });
     };
 
     useLayoutEffect(updateSPMainStyle, [height]);
-
 
     // Note: Dev environment triggers a refresh on page entry
     // this does not happen for real build
     useEffect(() => {
         return () => {
             setParticleOptions(defaultParticleOptions);
-        }
+        };
     }, []);
 
     const handleToggle = () => {
         setMenuOpen((prev) => !prev);
-    }
-
-
-
-    const handleSpeed = (container: Container, value: number) => {
-        container.particles.filter(() => true).forEach((particle) => {
-            applyParticleSpeedFactor(particle, value);
-        });
-
-        appliedSpeedRef.current = value;
-
-
     };
 
-    const handleFlicker = (container: Container, value: number) => {
-        container.particles.filter(() => true).forEach((particle) => {
-            applyParticleFlickerFactor(particle, value);
-        });
+    const _handleSpeed = (container: Container, value: number) => {
+        container.particles
+            .filter(() => true)
+            .forEach((particle) => {
+                applyParticleSpeedFactor(particle, value);
+            });
+
+        appliedSpeedRef.current = value;
+    };
+
+    const _handleFlicker = (container: Container, value: number) => {
+        container.particles
+            .filter(() => true)
+            .forEach((particle) => {
+                applyParticleFlickerFactor(particle, value);
+            });
 
         appliedFlickerRef.current = value;
-    }
+    };
 
-    const handleCount = (container: Container, value: number) => {
+    const _handleCount = (container: Container, value: number) => {
         const diff = Math.abs(appliedCountRef.current - value);
 
         // Do nothing
@@ -131,13 +138,12 @@ export default function Stars() {
         // Deleting
         else if (value < appliedCountRef.current) {
             container.particles.removeQuantity(diff);
-        }
-        else {
+        } else {
             for (let i = 0; i < diff; i++) {
                 const pxRatio = container.retina.pixelRatio;
                 const position = {
                     x: Math.floor(Math.random() * pxRatio * width),
-                    y: Math.floor(Math.random() * pxRatio * height)
+                    y: Math.floor(Math.random() * pxRatio * height),
                 };
 
                 // Make sure to apply to current factors
@@ -149,60 +155,76 @@ export default function Stars() {
             }
         }
         appliedCountRef.current = value;
-    }
+    };
+
+    const handleSpeed = handleChangeWrapper(_handleSpeed);
+    const handleFlicker = handleChangeWrapper(_handleFlicker);
+    const handleCount = handleChangeWrapper(_handleCount);
 
     return (
-        <div ref={SPMainRef} style={menuOpen ? {} : SPMainStyle} className={`star-panel-main ${menuOpen ? `` : `closed`}`}>
-
+        <div
+            ref={SPMainRef}
+            style={menuOpen ? {} : SPMainStyle}
+            className={`star-panel-main ${menuOpen ? `` : `closed`}`}
+        >
             {/* Toggle */}
-            <div ref={SPToggleRef} onClick={handleToggle} className={`star-panel-toggle ${menuOpen ? `` : `closed`}`}>
+            <div
+                ref={SPToggleRef}
+                onClick={handleToggle}
+                className={`star-panel-toggle ${menuOpen ? `` : `closed`}`}
+            >
                 <button className="glass" aria-label="icon">
-                    <div className={`${menuOpen ? `` : `rotate-180`} transition-transform`}>
+                    <div
+                        className={`${menuOpen ? `` : `rotate-180`} transition-transform`}
+                    >
                         <FaAngleDown size={30} />
                     </div>
                 </button>
             </div>
 
             {/* Controls */}
-            <div className={`glass-panel star-panel-control ${menuOpen ? `` : `closed`}`} inert={!menuOpen ? true : undefined}>
+            <div
+                className={`glass-panel star-panel-control ${menuOpen ? `` : `closed`}`}
+                inert={!menuOpen ? true : undefined}
+            >
                 <Box sx={{ width: 200 }}>
                     <div>
                         <p>Star Twinkle: x{flickerRate}</p>
                         <Slider
-                            aria-label='star-flicker'
+                            aria-label="star-flicker"
                             value={flickerRate}
                             min={0}
                             max={10}
                             step={1}
                             onChange={(_, value) => setFlickerRate(value)}
-                            onChangeCommitted={handleChangeWrapper(handleFlicker)}
+                            onChangeCommitted={handleFlicker}
                         />
                     </div>
                     <div>
                         <p>Star Count: {starCount}</p>
                         <Slider
-                            aria-label='star-count'
+                            aria-label="star-count"
                             value={starCount}
                             min={0}
                             max={2000}
                             step={250}
                             onChange={(_, value) => setStarCount(value)}
-                            onChangeCommitted={handleChangeWrapper(handleCount)}
+                            onChangeCommitted={handleCount}
                         />
                     </div>
                     <div>
                         <p>Star Speed: x{starSpeed}</p>
                         <Slider
-                            aria-label='star-movement'
+                            aria-label="star-movement"
                             value={starSpeed}
                             min={0}
                             max={10}
                             onChange={(_, value) => setStarSpeed(value)}
-                            onChangeCommitted={handleChangeWrapper(handleSpeed)}
+                            onChangeCommitted={handleSpeed}
                         />
                     </div>
                 </Box>
             </div>
-        </div >
+        </div>
     );
 }

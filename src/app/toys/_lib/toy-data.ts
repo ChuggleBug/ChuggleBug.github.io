@@ -1,5 +1,3 @@
-
-
 /*
  * Structure for toys:
  * internalName: The name used by internal services such as API status checks
@@ -11,27 +9,29 @@
  * useReactLink: use <Link> or <a>
  *  - Note: In most cases <a> works fine. <Link> needs to be used if
  *      webPath points to somewhere that is managed by the react homepage
-*/
+ */
 export type Toy = {
-    internalName: string,
-    displayName: string,
-    description: string,
-    webPath: string,
-    useReactLink?: boolean
+    internalName: string;
+    displayName: string;
+    description: string;
+    webPath: string;
+    useReactLink?: boolean;
 };
 
 export const TOYS: ReadonlyArray<Toy> = [
     {
         internalName: "stars",
         displayName: "Star Controls",
-        description: "I wanted to see how these \"stars\" would look like with different configurations, so I made a control panel.",
+        description:
+            'I wanted to see how these "stars" would look like with different configurations, so I made a control panel.',
         webPath: "/stars",
         useReactLink: true,
     },
     {
         internalName: "wikigraph",
         displayName: "WikiGraph",
-        description: "Wikipedia is a highly connected article database, so I made it into a explorable graph.",
+        description:
+            "Wikipedia is a highly connected article database, so I made it into a explorable graph.",
         webPath: "/app/wikigraph",
     },
 ];

@@ -10,7 +10,7 @@ export type NavStore = {
 
 export function useNavStore() {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     const toggleNav = () => {
         setIsOpen(!isOpen);
     };
@@ -19,6 +19,5 @@ export function useNavStore() {
         open: isOpen,
         onToggle: toggleNav,
         onClose: () => setIsOpen(false),
-
-    };  
+    };
 }

@@ -1,5 +1,3 @@
-
-
 export default function NotFound() {
     return (
         <div className="fixed inset-0 w-screen h-screen flex items-center justify-center">
@@ -10,5 +8,5 @@ export default function NotFound() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

@@ -4,31 +4,33 @@ import StarCover from "./_components/StarCover";
 import "./globals.css";
 
 export default function Home() {
-
-  return (
-    <div className="absolute inset-0 flex">
-      <div className="m-auto w-fit h-fit">
-        <StarCover>
-          <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-10 p-5">
-            <div className="text-white md:h-full top-0 max-w-100 md:max-w-175 text-justify md:pr-25 w-fit">
-              <h1>Welcome</h1>
-              <p>
-                Happy to see that you are here. Feel free to navigate to my blog 
-                to check out anything that I write about, or go play with any toys that I made.<br/>
-                I always work on this site so some things are under construction and can change.
-              </p>
+    return (
+        <div className="absolute inset-0 flex">
+            <div className="m-auto w-fit h-fit">
+                <StarCover>
+                    <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-10 p-5">
+                        <div className="text-white md:h-full top-0 max-w-100 md:max-w-175 text-justify md:pr-25 w-fit">
+                            <h1>Welcome</h1>
+                            <p>
+                                Happy to see that you are here. Feel free to
+                                navigate to my blog to check out anything that I
+                                write about, or go play with any toys that I
+                                made.
+                                <br />I always work on this site so some things
+                                are under construction and can change.
+                            </p>
+                        </div>
+                        <div className="overflow-hidden rounded min-w-[250px] max-w-[500px] max-h-[150px] max-h-[300px] flex items-center justify-center">
+                            <Image
+                                className="w-full h-full object-contain"
+                                src={homepageImage}
+                                alt="Homepage Image"
+                                loading="eager"
+                            />
+                        </div>
+                    </div>
+                </StarCover>
             </div>
-            <div className="overflow-hidden rounded min-w-[250px] max-w-[500px] max-h-[150px] max-h-[300px] flex items-center justify-center">
-              <Image
-                className="w-full h-full object-contain"
-                src={homepageImage}
-                alt="Homepage Image"
-                loading="eager"
-              />
-            </div>
-          </div>
-        </StarCover>
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
