@@ -1,6 +1,5 @@
 "use client";
 
-import "../globals.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import logo from "@/public/logo.svg";

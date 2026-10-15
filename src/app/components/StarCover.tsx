@@ -1,5 +1,3 @@
-import "../globals.css";
-
 type StarCoverProps = {
     children: React.ReactNode;
     hidden?: boolean;

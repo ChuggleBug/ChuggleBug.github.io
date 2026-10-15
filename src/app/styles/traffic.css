@@ -1,3 +1,4 @@
+@import "tailwindcss";
 /* Modified from https://codepen.io/atdrago/pen/yezrBR */
 
 @theme {
@@ -16,7 +17,6 @@
 
 .traffic-light {
     --light: var(--traffic-gray);
-
     border-radius: 100%;
     padding: 0;
     height: 12px;

@@ -1,23 +1,15 @@
 @import "tailwindcss";
 
-@import "./styles/glass.css";
-@import "./styles/navigator.css";
-@import "./styles/star-control.css";
-@import "./styles/star-cover.css";
-@import "./styles/toy-element.css";
-@import "./styles/traffic.css";
-
-:root {
+@theme {
+    /* Fonts */
     --font-geist-sans: "Geist Sans", sans-serif;
     --font-geist-mono: "Geist Mono", monospace;
-}
 
-@theme {
     /* Colors */
     /* Near Dark */
-    /* --color-background: #0C090A; */
+    /* --color-background: #0c090a; */
     /* Dark Blue */
-    /* --color-background: #05070f;  */
+    /* --color-background: #05070f; */
     /* Grayish Blue */
     /* --color-background: #0d0e16; */
     /* Blue */

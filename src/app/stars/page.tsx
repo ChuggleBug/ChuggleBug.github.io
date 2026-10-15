@@ -1,7 +1,5 @@
 "use client";
 
-import "../globals.css";
-
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
@@ -16,7 +14,6 @@ import { FaAngleDown } from "react-icons/fa";
 import { type Container, type Particle } from "@tsparticles/engine";
 import useWindowDimensions from "@/app/lib/useWindowDimensions";
 import { useIsMobile } from "@/app/lib/useIsMobile";
-
 
 function handleChangeWrapper(cb: (c: Container, v: number) => void) {
     return (_: React.SyntheticEvent | Event, value: number | number[]) => {

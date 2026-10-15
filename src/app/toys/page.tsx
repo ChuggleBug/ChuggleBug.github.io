@@ -1,7 +1,5 @@
 "use client";
 
-import "../globals.css";
-
 import TOYS from "@/app/toys/lib/toy-data";
 import { ToyElement, ToyElementMobile } from "@/app/toys/components/ToyElement";
 import { useIsMobile } from "@/app/lib/useIsMobile";

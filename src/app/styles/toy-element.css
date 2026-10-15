@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 .toy-element {
     padding: calc(var(--spacing) * 5);
     height: 450px;

@@ -1,4 +1,3 @@
-import "@/app/globals.css";
 import { type Status } from "@/app/lib/api";
 
 export type LightIndicatorProps = {

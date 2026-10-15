@@ -1,7 +1,6 @@
 import Image from "next/image";
 import homepageImage from "@/public/homepage-image.gif";
 import StarCover from "@/app/components/StarCover";
-import "./globals.css";
 
 export default function Home() {
     return (

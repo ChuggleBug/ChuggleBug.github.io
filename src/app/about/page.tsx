@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import "../globals.css";
 
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
@@ -24,7 +23,7 @@ const pfpSources: Record<pfpState, { src: string; alt: string; href: string }> =
     };
 
 export default function About() {
-    const [pfpState, setPfpState] = useState<pfpState>("linkedin");
+    const [pfpState, setPfpState] = useState<pfpState>("github");
     const [loaded, setLoaded] = useState<Record<pfpState, boolean>>({
         linkedin: false,
         github: false,
