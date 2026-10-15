@@ -5,6 +5,7 @@
 @import "./_styles/star-control.css";
 @import "./_styles/star-cover.css";
 @import "./_styles/toy-element.css";
+@import "./_styles/traffic.css";
 
 :root {
   --font-geist-sans: "Geist Sans", sans-serif;

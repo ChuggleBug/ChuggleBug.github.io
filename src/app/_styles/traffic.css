@@ -1,0 +1,51 @@
+/* Modified from https://codepen.io/atdrago/pen/yezrBR */
+
+@theme {
+  --traffic-red: #ff6159;
+  --traffic-red-hover: #bf4942;
+
+  --traffic-yellow: #ffbd2e;
+  --traffic-yellow-hover: #bf8e22;
+
+  --traffic-green: #28c941;
+  --traffic-green-hover: #1d9730;
+
+  --traffic-gray: #ddd;
+  --traffic-gray-hover: #c4c4c4;
+}
+
+.traffic-light {
+  --light: var(--traffic-gray);
+
+  border-radius: 100%;
+  padding: 0;
+  height: 12px;
+  width: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  /* box-sizing: border-box; */
+  background-color: var(--light);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    0 0 4px color-mix(in srgb, var(--light) 60%, transparent);
+  outline: none;
+
+  &[light-status="down"] {
+    --light: var(--traffic-red);
+    &:hover { --light: var(--traffic-red-hover); }
+  }
+
+  /* &[light-status=""] {
+    --light: var(--traffic-yellow);
+    &:hover { --light: var(--traffic-yellow-hover); }
+  } */
+
+  &[light-status="ok"] {
+    --light: var(--traffic-green);
+    &:hover { --light: var(--traffic-green-hover); }
+  }
+
+  &[light-status="unknown"] {
+    --light: var(--traffic-gray);
+    &:hover { --light: var(--traffic-gray-hover); }
+  }
+}

@@ -5,9 +5,21 @@ import "../globals.css"
 import TOYS from "./_lib/toy-data";
 import { ToyElement, ToyElementMobile } from "./_components/ToyElement";
 import { useIsMobile } from "../_lib/is-mobile";
+import { useEffect, useState } from "react";
+import { getAPIStatus, StatusReport } from "@/app/_lib/api"
 
 export default function Toys() {
     const isMobile = useIsMobile();
+
+    const [apiStatus, setApiStatus] = useState<StatusReport | null>(null)
+
+    useEffect(() => {
+        async function fetch_data() {
+            const status = await getAPIStatus()
+            setApiStatus(status)   
+        }
+        fetch_data()
+    },[]);
 
     // Figure what container to 
     // use since mobile doesnt have mouse
@@ -28,7 +40,7 @@ export default function Toys() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-between">
                 {TOYS.map((t, _) => {
-                    return <EvalutatedToyElement key={t.title} toy={t}/>;
+                    return <EvalutatedToyElement key={t.displayName} toy={t} serviceStatus={apiStatus ? apiStatus[t.internalName] : null} />;
                 })}
             </div>
 
