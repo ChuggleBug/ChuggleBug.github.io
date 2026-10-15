@@ -1,4 +1,4 @@
-import { isMobile } from "./is-mobile";
+import { isMobile } from "@/app/lib/useIsMobile";
 
 export type ParticleOptions = any;
 

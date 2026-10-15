@@ -2,11 +2,11 @@
 
 import "../globals.css";
 
-import TOYS from "./_lib/toy-data";
-import { ToyElement, ToyElementMobile } from "./_components/ToyElement";
-import { useIsMobile } from "../_lib/is-mobile";
+import TOYS from "@/app/toys/lib/toy-data";
+import { ToyElement, ToyElementMobile } from "@/app/toys/components/ToyElement";
+import { useIsMobile } from "@/app/lib/useIsMobile";
 import { useEffect, useState } from "react";
-import { getAPIStatus, StatusReport } from "@/app/_lib/api";
+import { getAPIStatus, StatusReport } from "@/app/lib/api";
 
 export default function Toys() {
     const isMobile = useIsMobile();

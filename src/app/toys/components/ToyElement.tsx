@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { type Toy } from "../_lib/toy-data";
+import { type Toy } from "@/app/toys/lib/toy-data";
 import Link from "next/link";
 import Image from "next/image";
-import { useIsMobile } from "@/app/_lib/is-mobile";
-import { type ProjectHealth } from "@/app/_lib/api";
-import { LightIndicator } from "./LightIndicator";
+import { useIsMobile } from "@/app/lib/useIsMobile";
+import { type ProjectHealth } from "@/app/lib/api";
+import { LightIndicator } from "@/app/toys/components/LightIndicator";
 
 // Assets are served statically from public/toys/<title>/
 function getThumbnail(title: string) {

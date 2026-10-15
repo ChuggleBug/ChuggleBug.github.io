@@ -7,15 +7,16 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import defaultParticleOptions, {
     DEFAULT_STAR_COUNT,
-} from "../_lib/default-particle";
+} from "@/app/lib/default-particle";
 import {
     getParticleContainer,
     setParticleOptions,
-} from "../_lib/particle-control";
+} from "@/app/lib/particle-control";
 import { FaAngleDown } from "react-icons/fa";
 import { type Container, type Particle } from "@tsparticles/engine";
-import useWindowDimensions from "../_lib/useWindowDimensions";
-import { useIsMobile } from "../_lib/is-mobile";
+import useWindowDimensions from "@/app/lib/useWindowDimensions";
+import { useIsMobile } from "@/app/lib/useIsMobile";
+
 
 function handleChangeWrapper(cb: (c: Container, v: number) => void) {
     return (_: React.SyntheticEvent | Event, value: number | number[]) => {

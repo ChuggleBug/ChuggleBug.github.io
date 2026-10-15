@@ -1,10 +1,10 @@
 "use client";
 
 import "./globals.css";
-import ParticlesBackground from "./_components/ParticleBackground";
-import AppNavigator from "./_components/AppNavigator";
-import { useNavStore } from "./_lib/useNavStore";
-import { useWebGL } from "./_lib/useWebGL";
+import ParticlesBackground from "@/app/components/ParticleBackground";
+import AppNavigator from "@/app/components/AppNavigator";
+import { useNavStore } from "@/app/lib/useNavStore";
+import { useWebGL } from "@/app/lib/useWebGL";
 
 export default function RootLayout({
     children,

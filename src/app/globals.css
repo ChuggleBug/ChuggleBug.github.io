@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-@import "./_styles/glass.css";
-@import "./_styles/navigator.css";
-@import "./_styles/star-control.css";
-@import "./_styles/star-cover.css";
-@import "./_styles/toy-element.css";
-@import "./_styles/traffic.css";
+@import "./styles/glass.css";
+@import "./styles/navigator.css";
+@import "./styles/star-control.css";
+@import "./styles/star-cover.css";
+@import "./styles/toy-element.css";
+@import "./styles/traffic.css";
 
 :root {
     --font-geist-sans: "Geist Sans", sans-serif;
@@ -19,7 +19,7 @@
     /* Dark Blue */
     /* --color-background: #05070f;  */
     /* Grayish Blue */
-    /* --color-background: #0D0E16;  */
+    /* --color-background: #0d0e16; */
     /* Blue */
     --color-background: #080b16;
 

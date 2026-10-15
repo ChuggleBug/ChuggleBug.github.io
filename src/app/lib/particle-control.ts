@@ -1,7 +1,7 @@
 import {
     defaultParticleOptions,
     type ParticleOptions,
-} from "./default-particle";
+} from "@/app/lib/default-particle";
 import { type Container } from "@tsparticles/engine";
 
 type Listener = () => void;

@@ -9,8 +9,8 @@ import {
     getParticleOptions,
     setParticlesContainer,
     subscribeParticleOptions,
-} from "../_lib/particle-control";
-import { defaultParticleOptions } from "../_lib/default-particle";
+} from "@/app/lib/particle-control";
+import { defaultParticleOptions } from "@/app/lib/default-particle";
 
 const particlesInit = async (engine: Engine) => {
     await loadSlim(engine);
