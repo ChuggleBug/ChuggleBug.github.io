@@ -43,7 +43,7 @@ export default function About() {
                 </div>
 
                 {/* About image */}
-                <div className="glass-panel-content flex-1 items-center justify-center min-h-fit h-auto">
+                <div className="relative glass-panel-content flex-1 items-center justify-center min-h-fit h-auto">
                     <div className="absolute z-10 bottom-5 right-5 flex flex-row-reverse gap-2">
                         <button className="glass-dark" aria-label="icon" onClick={() => setPfpState('linkedin')}>
                             <FaLinkedin size={24} />
