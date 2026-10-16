@@ -33,11 +33,11 @@ export default function About() {
         setLoaded((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
 
     return (
-        <div className="lg:px-20 p-10 flex flex-col gap-5">
+        <div className="flex flex-col gap-5 px-5 lg:px-20 py-10">
             {/* About Me */}
             <div className="flex flex-col-reverse md:flex-row gap-5">
                 {/* About text */}
-                <div className="glass-panel-content flex-3">
+                <div className="glass-content flex-3">
                     <h2>About Me</h2>
                     <p className="min-h-[200px]">
                         Still figuring out what to write here
@@ -45,18 +45,18 @@ export default function About() {
                 </div>
 
                 {/* About image */}
-                <div className="relative glass-panel-content flex-1 items-center justify-center min-h-fit h-auto">
+                <div className="relative glass-content flex-1 items-center justify-center min-h-fit h-auto">
                     <div className="absolute z-10 bottom-5 right-5 flex flex-row-reverse gap-2">
                         <button
                             className="glass-dark"
-                            aria-label="icon"
+                            content-type="icon"
                             onClick={() => setPfpState("linkedin")}
                         >
                             <FaLinkedin size={24} />
                         </button>
                         <button
                             className="glass-dark"
-                            aria-label="icon"
+                            content-type="icon"
                             onClick={() => setPfpState("github")}
                         >
                             <FaGithub size={24} />
@@ -93,7 +93,7 @@ export default function About() {
             </div>
 
             {/* About Website */}
-            <div className="glass-panel-content">
+            <div className="glass-content">
                 <h2>About this Site</h2>
                 <div className="min-h-[200px]">
                     For Now:

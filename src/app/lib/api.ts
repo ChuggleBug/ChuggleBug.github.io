@@ -2,7 +2,8 @@ export async function apiFetch(
     input: string,
     init?: RequestInit,
 ): Promise<Response> {
-    return fetch(`${process.env.NEXT_PUBLIC_API_URL}/${input}`, init);
+    // return fetch(`${process.env.NEXT_PUBLIC_API_URL}/${input}`, init);
+    return Promise.reject();
 }
 
 export type Status = "ok" | "unknown";

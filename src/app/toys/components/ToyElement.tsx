@@ -49,7 +49,7 @@ function ToyImage({ name: title, showDemo }: ToyImageProps) {
                     loop
                     playsInline
                     disablePictureInPicture
-                    aria-label={`Demo for the ${title} toy`}
+                    content-type={`Demo for the ${title} toy`}
                 />
             )}
         </div>
@@ -122,7 +122,7 @@ export function ToyElement({ toy, serviceStatus }: ToyEmenentProps) {
 
     const cardChildren = (
         <div
-            className="glass-panel toy-element flex flex-col"
+            className="glass toy-element flex flex-col"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
@@ -199,8 +199,8 @@ export function ToyElementMobile({ toy, serviceStatus }: ToyEmenentProps) {
 
     const NavButton = (
         <button
-            className="glass-dark toy-element-mobile-button"
-            aria-label="text"
+            className="glass-dark toy-element-mobile-button w-fit! px-5!"
+            content-type="text"
         >
             {(toy.useReactLink ?? false) ? (
                 <Link className="text-2xl" href={toy.webPath}>
@@ -217,7 +217,7 @@ export function ToyElementMobile({ toy, serviceStatus }: ToyEmenentProps) {
     return (
         <div onClick={() => setFlipped(!flipped)}>
             <div
-                className={`glass-panel toy-element-mobile ${flipped ? "rotate-y-180 flipped" : ""} flex flex-col items-center-safe`}
+                className={`glass toy-element-mobile ${flipped ? "rotate-y-180 flipped" : ""} flex flex-col items-center-safe`}
             >
                 <div
                     className={`relative flex flex-row gap-2 items-center justify-start w-full -top-1 ${flipped ? "opacity-0" : ""}`}

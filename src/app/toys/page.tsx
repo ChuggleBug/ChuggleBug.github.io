@@ -26,7 +26,7 @@ export default function Toys() {
 
     return (
         <div className="flex flex-col gap-5 px-5 lg:px-20 py-10">
-            <div className="glass-panel-content">
+            <div className="glass-content">
                 <div>
                     <h2>Toys That I've Made</h2>
                     <p>

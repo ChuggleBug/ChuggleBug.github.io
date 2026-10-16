@@ -171,7 +171,7 @@ export default function Stars() {
                 onClick={handleToggle}
                 className={`star-panel-toggle ${menuOpen ? `` : `closed`}`}
             >
-                <button className="glass" aria-label="icon">
+                <button className="glass" content-type="icon">
                     <div
                         className={`${menuOpen ? `` : `rotate-180`} transition-transform`}
                     >
@@ -182,14 +182,15 @@ export default function Stars() {
 
             {/* Controls */}
             <div
-                className={`glass-panel star-panel-control ${menuOpen ? `` : `closed`}`}
+                className={`glass star-panel-control ${menuOpen ? `` : `closed`}`}
+                set-blur="true"
                 inert={!menuOpen ? true : undefined}
             >
                 <Box sx={{ width: 200 }}>
                     <div>
                         <p>Star Twinkle: x{flickerRate}</p>
                         <Slider
-                            aria-label="star-flicker"
+                            content-type="star-flicker"
                             value={flickerRate}
                             min={0}
                             max={10}
@@ -201,7 +202,7 @@ export default function Stars() {
                     <div>
                         <p>Star Count: {starCount}</p>
                         <Slider
-                            aria-label="star-count"
+                            content-type="star-count"
                             value={starCount}
                             min={0}
                             max={2000}
@@ -213,7 +214,7 @@ export default function Stars() {
                     <div>
                         <p>Star Speed: x{starSpeed}</p>
                         <Slider
-                            aria-label="star-movement"
+                            content-type="star-movement"
                             value={starSpeed}
                             min={0}
                             max={10}

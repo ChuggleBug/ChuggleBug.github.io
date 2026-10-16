@@ -37,7 +37,7 @@ function SidebarNavigator({ onToggle, onClose, open }: AppNavigatorProps) {
             {/* <div className="cursor-pointer w-fit sticky z-10 top-5 left-5 mb-5" onClick={onToggle}></div> */}
             <button
                 className="w-fit glass"
-                aria-label="icon"
+                content-type="icon"
                 onClick={onToggle}
             >
                 <GiHamburgerMenu size={30} />
@@ -116,17 +116,17 @@ function DefaultNavigator() {
             <nav className="flex gap-5">
                 {/* Points to non-react managed website */}
                 <a href="/blog">
-                    <button className="glass" aria-label="text">
+                    <button className="glass" content-type="text">
                         Blog
                     </button>
                 </a>
                 <Link href="/about">
-                    <button className="glass" aria-label="text">
+                    <button className="glass" content-type="text">
                         About
                     </button>
                 </Link>
                 <Link href="/toys">
-                    <button className="glass" aria-label="text">
+                    <button className="glass" content-type="text">
                         Toys
                     </button>
                 </Link>

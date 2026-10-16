@@ -1,62 +1,57 @@
 @import "tailwindcss";
 /* Styles from https://codepen.io/kanishkkunal/pen/QWGzBwz */
 
-.glass-panel,
-.glass-panel-content {
-    color: #fff;
-    /* margin: 40px auto; */
-    background-color: rgba(255, 255, 255, 0.06);
+@theme {
+    --color-glass: color-mix(in srgb, var(--color-background) 80%, #ffffff 5%);
+    --color-glass-dark: color-mix(
+        in srgb,
+        var(--color-background) 80%,
+        #000000 5%
+    );
+}
+
+.glass,
+.glass-dark,
+.glass-content {
+    background-color: var(--color-glass);
     border: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
     border-radius: 15px;
-    /* padding: 32px; */
-    backdrop-filter: blur(10px);
 }
 
-.glass-panel-content {
+.glass[set-blur="true"],
+.glass-content[set-blur="true"],
+.glass-dark[set-blur="true"],
+button.glass,
+button.glass-dark {
+    backdrop-filter: blur(6px);
+}
+
+.glass-content {
     display: flex;
     flex-direction: column;
     padding: calc(var(--spacing) * 10);
     text-align: left;
 }
 
-button.glass-dark,
-button.glass {
+button.glass,
+button.glass-dark {
     display: inline-block;
     border: 0;
     text-decoration: none;
     border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--color-glass);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     font-size: 14px;
     letter-spacing: 2px;
     cursor: pointer;
 
-    /* Form tailwind "transition" */
+    /* From tailwind "transition"  */
     transition-property:
-        color,
-        background-color,
-        border-color,
-        outline-color,
-        text-decoration-color,
-        fill,
-        stroke,
-        --tw-gradient-from,
-        --tw-gradient-via,
-        --tw-gradient-to,
-        opacity,
-        box-shadow,
-        transform,
-        translate,
-        scale,
-        rotate,
-        filter,
-        -webkit-backdrop-filter,
-        backdrop-filter,
-        display,
-        content-visibility,
-        overlay,
+        color, background-color, border-color, outline-color,
+        text-decoration-color, fill, stroke, --tw-gradient-from,
+        --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform,
+        translate, scale, rotate, filter, display, content-visibility, overlay,
         pointer-events;
     transition-timing-function: var(--default-transition-timing-function);
     transition-duration: var(--default-transition-duration);
@@ -66,26 +61,33 @@ button.glass {
     font-weight: bold;
 }
 
+.glass-dark,
 button.glass-dark {
-    background-color: color-mix(rgba(255, 255, 255, 0.1) 50%, #000000 50%);
-    border: 1px solid color-mix(rgba(255, 255, 255, 0.1) 90%, #000000 10%);
+    background-color: color-mix(
+        in srgb,
+        color-mix(in srgb, var(--color-background) 10%, transparent) 50%,
+        #000000 50%
+    );
+    border: 1px solid
+        color-mix(in srgb, rgba(255, 255, 255, 0.1) 90%, #000000 10%);
 }
 
-button.glass-dark[aria-label="text"],
-button.glass[aria-label="text"] {
+button.glass[content-type="text"],
+button.glass-dark[content-type="text"] {
     min-width: calc(var(--spacing) * 20);
     padding: calc(var(--spacing) * 3) 0;
 }
 
-button.glass-dark[aria-label="icon"],
-button.glass[aria-label="icon"] {
+button.glass[content-type="icon"],
+button.glass-dark[content-type="icon"] {
+    cursor: pointer;
     padding: calc(var(--spacing) * 2);
 }
 
 button.glass:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: color-mix(in srgb, var(--color-glass) 50%, #fff 10%);
 }
 
 button.glass-dark:hover {
-    background-color: color-mix(rgba(255, 255, 255, 0.2) 50%, #000000 50%);
+    background-color: color-mix(in srgb, var(--color-glass-dark) 50%, #000 10%);
 }

@@ -29,8 +29,5 @@
 }
 
 .star-panel-toggle {
-    /* transition: all 0.2s ease-in-out; */
-}
-
-.star-panel-toggle.closed {
+    transition: all 0.2s ease-in-out;
 }

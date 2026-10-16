@@ -34,7 +34,7 @@
 }
 
 .sidebar-blur--blur {
-    backdrop-filter: blur(4px);
+    /* backdrop-filter: blur(4px); */
 }
 
 .sidebar-element {
