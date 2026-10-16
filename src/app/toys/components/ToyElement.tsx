@@ -14,7 +14,7 @@ function getThumbnail(title: string) {
 }
 
 function getDemo(title: string) {
-    return `/toys/${title}/demo.gif`;
+    return `/toys/${title}/demo.mp4`;
 }
 
 type ToyImageProps = {
@@ -22,13 +22,9 @@ type ToyImageProps = {
     showDemo: boolean;
 };
 
-// Shows the thumbnail, or the demo gif when showDemo is set.
+// Shows the thumbnail, or the demo video when showDemo is set.
 function ToyImage({ name: title, showDemo }: ToyImageProps) {
     const isMobile = useIsMobile();
-    const [demoLoaded, setDemoLoaded] = useState<boolean>(false);
-    if (showDemo && !demoLoaded) {
-        setDemoLoaded(true);
-    }
 
     return (
         <div className="relative">
@@ -40,14 +36,20 @@ function ToyImage({ name: title, showDemo }: ToyImageProps) {
                 alt={`Thumbnail for the ${title} toy`}
                 loading="eager"
             />
-            {demoLoaded && (
-                <Image
-                    className={`absolute inset-0 overflow-clip rounded select-none ${showDemo ? "visible" : "invisible"} ${isMobile ? "rotate-y-180" : ""}`}
+            {showDemo && (
+                <video
+                    className={`absolute inset-0 h-full w-full overflow-clip rounded object-cover select-none ${
+                        isMobile ? "rotate-y-180" : ""
+                    }`}
                     height={200}
                     width={250}
                     src={getDemo(title)}
-                    alt={`Demo for the ${title} toy`}
-                    loading="eager"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    disablePictureInPicture
+                    aria-label={`Demo for the ${title} toy`}
                 />
             )}
         </div>
