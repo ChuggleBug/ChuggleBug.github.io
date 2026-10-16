@@ -1,10 +1,8 @@
 import { isMobile } from "@/app/lib/useIsMobile";
-
-export type ParticleOptions = any;
-
+import { ISourceOptions } from "@tsparticles/engine";
 export const DEFAULT_STAR_COUNT = { mobile: 250, desktop: 500 };
 
-export const defaultParticleOptions = {
+export const defaultParticleOptions: ISourceOptions = {
     fpsLimit: isMobile ? 30 : 60,
     detectRetina: !isMobile,
     particles: {
