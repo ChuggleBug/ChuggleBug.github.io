@@ -77,7 +77,7 @@ export default function Stars() {
 
     const appliedFlickerRef = useRef<number>(1);
     const appliedCountRef = useRef<number>(
-        defaultParticleOptions.particles.number.value,
+        defaultParticleOptions.particles!.number!.value,
     );
     const appliedSpeedRef = useRef<number>(1);
 
@@ -128,13 +128,13 @@ export default function Stars() {
     };
 
     const _handleCount = (container: Container, value: number) => {
-        const diff = Math.abs(appliedCountRef.current - value);
+        const diff = Math.abs(appliedCountRef.current! - value);
 
         // Do nothing
         if (diff === 0) {
         }
         // Deleting
-        else if (value < appliedCountRef.current) {
+        else if (value < appliedCountRef.current!) {
             container.particles.removeQuantity(diff);
         } else {
             for (let i = 0; i < diff; i++) {
@@ -160,16 +160,17 @@ export default function Stars() {
     const handleCount = handleChangeWrapper(_handleCount);
 
     return (
+        // Note: Some of these css clssses dont exist
         <div
             ref={SPMainRef}
             style={menuOpen ? {} : SPMainStyle}
-            className={`star-panel-main ${menuOpen ? `` : `closed`}`}
+            className={`star-panel-main  ${menuOpen ? `` : `star-panel-main--closed`}`}
         >
             {/* Toggle */}
             <div
                 ref={SPToggleRef}
                 onClick={handleToggle}
-                className={`star-panel-toggle ${menuOpen ? `` : `closed`}`}
+                className={`star-panel-toggle ${menuOpen ? `` : `star-panel-toggle--closed`}`}
             >
                 <button className="glass" content-type="icon">
                     <div
@@ -182,7 +183,7 @@ export default function Stars() {
 
             {/* Controls */}
             <div
-                className={`glass star-panel-control ${menuOpen ? `` : `closed`}`}
+                className={`glass star-panel-control ${menuOpen ? `` : `star-panel-control--closed`}`}
                 set-blur="true"
                 inert={!menuOpen ? true : undefined}
             >

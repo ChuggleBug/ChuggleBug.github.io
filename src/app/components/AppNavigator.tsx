@@ -45,7 +45,7 @@ function SidebarNavigator({ onToggle, onClose, open }: AppNavigatorProps) {
 
             {/* Sidebar content. Make sure it cant be interacted with when closed */}
             <nav
-                className={`z-20 sidebar ${open ? `open` : ``}`}
+                className={`z-20 sidebar ${open ? `sidebar--open` : ``}`}
                 inert={!open ? true : undefined}
             >
                 <div className="relative flex flex-col w-full top-5 text-white font-bold">
@@ -116,17 +116,26 @@ function DefaultNavigator() {
             <nav className="flex gap-5">
                 {/* Points to non-react managed website */}
                 <a href="/blog">
-                    <button className="glass" content-type="text">
+                    <button
+                        className="glass navigator-button"
+                        content-type="text"
+                    >
                         Blog
                     </button>
                 </a>
                 <Link href="/about">
-                    <button className="glass" content-type="text">
+                    <button
+                        className="glass navigator-button"
+                        content-type="text"
+                    >
                         About
                     </button>
                 </Link>
                 <Link href="/toys">
-                    <button className="glass" content-type="text">
+                    <button
+                        className="glass navigator-button"
+                        content-type="text"
+                    >
                         Toys
                     </button>
                 </Link>

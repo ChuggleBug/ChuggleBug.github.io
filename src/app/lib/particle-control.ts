@@ -1,19 +1,16 @@
-import {
-    defaultParticleOptions,
-    type ParticleOptions,
-} from "@/app/lib/default-particle";
-import { type Container } from "@tsparticles/engine";
+import { defaultParticleOptions } from "@/app/lib/default-particle";
+import { ISourceOptions, type Container } from "@tsparticles/engine";
 
 type Listener = () => void;
 
-let particleOptions: ParticleOptions = defaultParticleOptions;
+let particleOptions: ISourceOptions = defaultParticleOptions;
 const listeners = new Set<Listener>();
 
 export function getParticleOptions() {
     return particleOptions;
 }
 
-export function setParticleOptions(opt: ParticleOptions) {
+export function setParticleOptions(opt: ISourceOptions) {
     particleOptions = structuredClone(opt);
     listeners.forEach((listener) => listener());
 }

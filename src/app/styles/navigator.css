@@ -15,7 +15,7 @@
     left: calc(-2 * var(--sidebar-width));
 }
 
-.sidebar.open {
+.sidebar--open {
     left: 0px;
     -webkit-box-shadow: 10px 0px 25px var(--color-background);
     -moz-box-shadow: 10px 0px 25px var(--color-background);
@@ -34,10 +34,15 @@
 }
 
 .sidebar-blur--blur {
-    /* backdrop-filter: blur(4px); */
+    /* Used to have blur() but removed due to performance */
+}
+
+.navigator-button {
+    text-transform: capitalize;
 }
 
 .sidebar-element {
+    text-transform: capitalize;
     transition: background-color 0.2s ease-out;
     background-color: var(--color-background);
 }
