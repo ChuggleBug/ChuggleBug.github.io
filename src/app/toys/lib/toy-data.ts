@@ -34,6 +34,13 @@ export const TOYS: ReadonlyArray<Toy> = [
             "Wikipedia is a highly connected article database, so I made it into a explorable graph.",
         webPath: "/app/wikigraph",
     },
+    {
+        internalName: "gh-blocks",
+        displayName: "GitHub Contributions Breakout",
+        description:
+            "I think the name is clear enough. It's a game of breakout with your GitHub Contrubution figure.",
+        webPath: "/app/gh-blocks",
+    },
 ];
 
 export default TOYS;
