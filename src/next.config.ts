@@ -10,8 +10,7 @@ const nextConfig: NextConfig = {
                   return [
                       {
                           source: "/proxy/:path*",
-                          destination:
-                              "https://chugglebug.onthewifi.com/:path*",
+                          destination: "https://api.chugglebug.dev/:path*",
                       },
                   ];
               },
