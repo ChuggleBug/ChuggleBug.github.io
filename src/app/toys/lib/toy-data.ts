@@ -5,7 +5,7 @@
  *  - Note: Both of these assets should be around 250px x 200px
  * displayName: Title of the toy card, with spaces replaced with "_"
  * description: A short statement about what this "toy" is
- * webPath: The path, relative to root
+ * webPath: The path, relative to root, with a trailing slash
  * useReactLink: use <Link> or <a>
  *  - Note: In most cases <a> works fine. <Link> needs to be used if
  *      webPath points to somewhere that is managed by the react homepage
@@ -24,7 +24,7 @@ export const TOYS: ReadonlyArray<Toy> = [
         displayName: "Star Controls",
         description:
             'I wanted to see how these "stars" would look like with different configurations, so I made a control panel.',
-        webPath: "/stars",
+        webPath: "/stars/",
         useReactLink: true,
     },
     {
@@ -32,14 +32,14 @@ export const TOYS: ReadonlyArray<Toy> = [
         displayName: "WikiGraph",
         description:
             "Wikipedia is a highly connected article database, so I made it into a explorable graph.",
-        webPath: "/app/wikigraph",
+        webPath: "/app/wikigraph/",
     },
     {
         internalName: "gh-blocks",
         displayName: "GitHub Contributions Breakout",
         description:
             "I think the name is clear enough. It's a game of breakout with your GitHub Contrubution figure.",
-        webPath: "/app/gh-blocks",
+        webPath: "/app/gh-blocks/",
     },
 ];
 
