@@ -1,13 +1,6 @@
 "use client";
 
-// Import All
 import "@/app/globals.css";
-import "@/app/styles/glass.css";
-import "@/app/styles/navigator.css";
-import "@/app/styles/star-control.css";
-import "@/app/styles/star-cover.css";
-import "@/app/styles/toy-element.css";
-import "@/app/styles/traffic.css";
 
 import ParticlesBackground from "@/app/components/ParticleBackground";
 import AppNavigator from "@/app/components/AppNavigator";

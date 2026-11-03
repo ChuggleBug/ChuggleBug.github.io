@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@import "./styles/glass.css";
+@import "./styles/navigator.css";
+@import "./styles/star-control.css";
+@import "./styles/star-cover.css";
+@import "./styles/toy-element.css";
+@import "./styles/traffic.css";
 
 @theme {
     /* Fonts */
