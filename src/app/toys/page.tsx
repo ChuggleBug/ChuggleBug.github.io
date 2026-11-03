@@ -1,7 +1,7 @@
 "use client";
 
 import TOYS from "@/app/toys/lib/toy-data";
-import { ToyElement, ToyElementMobile } from "@/app/toys/components/ToyElement";
+import { ToyElement } from "@/app/toys/components/ToyElement";
 import { useIsMobile } from "@/app/lib/useIsMobile";
 import { useEffect, useState } from "react";
 import { getAPIStatus, StatusReport } from "@/app/lib/api";
@@ -19,11 +19,6 @@ export default function Toys() {
         fetch_data();
     }, []);
 
-    // Figure what container to
-    // use since mobile doesnt have mouse
-    // and will need some other style.
-    const EvalutatedToyElement = isMobile ? ToyElementMobile : ToyElement;
-
     return (
         <div className="flex flex-col gap-5 px-5 lg:px-20 py-10">
             <div className="glass-content">
@@ -37,12 +32,14 @@ export default function Toys() {
                     </p>
                 </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-between">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-between"> */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 justify-between">
                 {TOYS.map((t) => {
                     return (
-                        <EvalutatedToyElement
+                        <ToyElement
                             key={t.displayName}
                             toy={t}
+                            includeButton={isMobile}
                             serviceStatus={
                                 apiStatus ? apiStatus[t.internalName] : null
                             }
