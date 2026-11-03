@@ -1,66 +1,16 @@
 "use client";
 
-import React, { useState, useId } from "react";
+import React, { useState } from "react";
 import { type Toy } from "@/app/toys/lib/toy-data";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { type ProjectHealth } from "@/app/lib/api";
-import { LightIndicator } from "@/app/toys/components/LightIndicator";
+import {
+    ServiceLightTable,
+    ServiceLightsRow,
+} from "@/app/toys/components/ServiceLights";
+import { ToyImage } from "@/app/toys/components/ToyImage";
 import { FaInfo } from "react-icons/fa";
-
-// Assets are served statically from public/toys/<title>/
-function getThumbnail(title: string) {
-    return `/toys/${title}/thumbnail.jpg`;
-}
-
-function getDemo(title: string) {
-    return `/toys/${title}/demo.mp4`;
-}
-
-type ToyImageProps = {
-    name: string;
-    showDemo: boolean;
-};
-
-// Shows the thumbnail, or the demo video when showDemo is set.
-function ToyImage({ name: title, showDemo }: ToyImageProps) {
-    return (
-        <div className="relative aspect-5/4">
-            <Image
-                className="object-cover w-full h-full overflow-clip rounded select-none"
-                height={200}
-                width={250}
-                src={getThumbnail(title)}
-                alt={`Thumbnail for the ${title} toy`}
-                loading="eager"
-            />
-            {showDemo && (
-                <video
-                    className="absolute inset-0 w-full h-full object-cover overflow-clip rounded select-none"
-                    height={200}
-                    width={250}
-                    src={getDemo(title)}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    disablePictureInPicture
-                    content-type={`Demo for the ${title} toy`}
-                />
-            )}
-        </div>
-    );
-}
-
-function serviceTypePrettyName(type: string) {
-    if (type === "web") {
-        return "Website";
-    } else if (type === "api") {
-        return "API";
-    }
-    return type;
-}
 
 type LinkWrapperProps = {
     toy: Toy;
@@ -81,91 +31,6 @@ type ToyEmenentProps = {
     serviceStatus: ProjectHealth | null;
     includeButton: boolean;
 };
-
-type ServiceLightsProps = {
-    services?: ProjectHealth | null;
-};
-
-function ServiceLightsRow({ services = null }: ServiceLightsProps) {
-    const id = useId();
-    const [hoveredStatusType, setHoveredStatusType] = useState<string | null>(
-        null,
-    );
-
-    let serviceMesssage = "No Services Reported";
-    if (services) {
-        const serviceNames = Object.keys(services).sort();
-        const serviceCount = serviceNames.length;
-        if (serviceCount > 0) {
-            const upCount = serviceNames.filter(
-                (k) => services[k].status === "ok",
-            ).length;
-            if (upCount === 0) {
-                serviceMesssage = "None Up";
-            } else if (upCount < serviceCount) {
-                serviceMesssage = "Some Up";
-            } else {
-                serviceMesssage = "All Up";
-            }
-        }
-    }
-
-    if (hoveredStatusType && services) {
-        const status = services[hoveredStatusType].status ?? "unknown";
-        serviceMesssage = `${serviceTypePrettyName(hoveredStatusType)}: ${status}`;
-    }
-
-    return (
-        <div
-            className="flex flex-row gap-2 items-center"
-            onMouseLeave={() => setHoveredStatusType(null)}
-        >
-            {Object.keys(services ?? {})
-                .sort()
-                .map((k) => {
-                    const status = services ? services[k].status : "unknown";
-                    return (
-                        <div
-                            className="relative"
-                            key={`${id}-${k}`}
-                            onMouseEnter={() => {
-                                setHoveredStatusType(k);
-                            }}
-                        >
-                            <LightIndicator size={18} status={status} />
-                        </div>
-                    );
-                })}
-            <p>{serviceMesssage}</p>
-        </div>
-    );
-}
-
-function ServiceLightTable({ services = null }: ServiceLightsProps) {
-    const id = useId();
-    const serviceNames = Object.keys(services ?? {}).sort();
-
-    if (!services || serviceNames.length === 0) {
-        return <p>No Services Reported</p>;
-    }
-
-    return (
-        <div className="flex flex-col gap-2">
-            {Object.keys(services).map((k) => {
-                const status = services ? services[k].status : "unknown";
-                return (
-                    <div
-                        className="relative flex flex-row items-center gap-2"
-                        key={`${id}-${k}`}
-                    >
-                        <LightIndicator size={18} status={status} />
-                        <p>{`${serviceTypePrettyName(k)}: ${status}`}</p>
-                    </div>
-                );
-            })}
-        </div>
-    );
-}
 
 export function ToyElement({
     toy,
@@ -231,12 +96,10 @@ export function ToyElement({
             {...cardLinkProps}
         >
             <div
-                className={`glass toy-element grid grid-cols-1 grid-rows-[0.25fr_3fr] gap-2 ${flipped ? "rotate-y-180" : ""}`}
+                className={`glass toy-element ${flipped ? "rotate-y-180" : ""}`}
             >
                 {/* Service and Info */}
-                <div
-                    className={`relative w-full h-fit flex flex-row items-center justify-between ${unflip}`}
-                >
+                <div className={`relative ${unflip}`}>
                     <div
                         className={flipped ? "invisible" : ""}
                         aria-hidden={flipped}
@@ -244,7 +107,7 @@ export function ToyElement({
                         <ServiceLightsRow services={serviceStatus} />
                     </div>
                     <button
-                        className="glass-dark w-fit! absolute p-2 -right-2 -top-2"
+                        className="glass-dark w-fit! absolute -right-2 -top-2"
                         content-type="icon"
                         set-blur="true"
                         onClick={(e) => {
@@ -257,11 +120,9 @@ export function ToyElement({
                     </button>
                 </div>
 
-                <div
-                    className={`grid sm:grid-cols-[1.25fr_1fr] md:grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-5 ${unflip}`}
-                >
+                <div className={`toy-element-main ${unflip}`}>
                     {/* Image */}
-                    <div className="flex w-full h-full items-start justify-center rounded">
+                    <div className="rounded">
                         <ToyImage name={toy.internalName} showDemo={showDemo} />
                     </div>
                     {/* Side Content */}
@@ -272,18 +133,14 @@ export function ToyElement({
                                 className={`col-start-1 row-start-1 ${flipped ? "" : "invisible"}`}
                                 aria-hidden={!flipped}
                             >
-                                <p className="toy-title text-left w-full pb-1">
-                                    Services
-                                </p>
+                                <p className="toy-title">Services</p>
                                 <ServiceLightTable services={serviceStatus} />
                             </div>
                             <div
                                 className={`col-start-1 row-start-1 ${flipped ? "invisible" : ""}`}
                                 aria-hidden={flipped}
                             >
-                                <p className="toy-title text-left w-full pb-1">
-                                    {toy.displayName}
-                                </p>
+                                <p className="toy-title">{toy.displayName}</p>
                                 <p>{toy.description}</p>
                             </div>
                         </div>

@@ -1,62 +1,25 @@
-@import "tailwindcss";
+@layer components {
+    .toy-element {
+        @apply p-5 h-full flex flex-col gap-2;
+        transition: all 0.2s ease-out;
+    }
 
-.toy-element {
-    padding: calc(var(--spacing) * 5);
-    min-height: 450px;
-    height: 100%;
-    /* max-width: 300px; */
-    min-width: 250px;
-    transition: all 0.2s ease-out;
-}
+    .toy-element:hover {
+        box-shadow: 0px 0px 10px 1px
+            color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
+        cursor: pointer;
+    }
 
-.toy-element-mobile {
-    padding: calc(var(--spacing) * 5);
-    min-height: 450px;
-    height: 100%;
-    /* max-width: 300px; */
-    min-width: 250px;
-    transition: all 0.2s ease-out;
-}
+    .toy-element-main {
+        @apply grid sm:grid-cols-[1.25fr_1fr] md:grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-5;
+    }
 
-.toy-element-mobile.flipped {
-    -webkit-box-shadow: 0px 0px 10px 1px
-        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
-    -moz-box-shadow: 0px 0px 10px 1px
-        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
-    box-shadow: 0px 0px 10px 1px
-        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
-}
+    .toy-image {
+        @apply object-cover w-full h-full overflow-clip select-none;
+    }
 
-.toy-element-mobile-content {
-    transition: all 0.1s ease-out;
-}
-
-.toy-element:hover {
-    -webkit-box-shadow: 0px 0px 10px 1px
-        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
-    -moz-box-shadow: 0px 0px 10px 1px
-        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
-    box-shadow: 0px 0px 10px 1px
-        color-mix(in srgb, var(--color-background) 80%, #ffffff 20%);
-    cursor: pointer;
-}
-
-.toy-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-/* Some attributes derrived from glass-button and sidebar-button */
-.toy-element-mobile-button {
-    display: inline-block;
-    text-decoration: none;
-    border-radius: 15px;
-    padding-left: calc(var(--spacing) * 5);
-    padding-right: calc(var(--spacing) * 5);
-    padding-top: calc(var(--spacing) * 2);
-    padding-bottom: calc(var(--spacing) * 2);
-    -webkit-box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.2);
-    -moz-box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.2);
-    text-transform: uppercase;
+    .toy-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 }
