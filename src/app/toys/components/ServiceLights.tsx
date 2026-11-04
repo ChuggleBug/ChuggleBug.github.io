@@ -32,9 +32,9 @@ export function ServiceLightsRow({ services = null }: ServiceLightsProps) {
             if (upCount === 0) {
                 serviceMesssage = "None Up";
             } else if (upCount < serviceCount) {
-                serviceMesssage = "Some Up";
+                serviceMesssage = `Some Up (${upCount}/${serviceCount})`;
             } else {
-                serviceMesssage = "All Up";
+                serviceMesssage = `All Up (${serviceCount})`;
             }
         }
     }
