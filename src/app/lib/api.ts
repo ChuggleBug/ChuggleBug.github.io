@@ -1,11 +1,15 @@
+function resolve(path: string): string {
+    return `${process.env.NEXT_PUBLIC_API_URL}/${path.replace(/^\/+/, "")}`;
+}
+
 export async function apiFetch(
     input: string,
     init?: RequestInit,
 ): Promise<Response> {
-    return fetch(`${process.env.NEXT_PUBLIC_API_URL}/${input}`, init);
+    return fetch(resolve(input), init);
 }
 
-export type Status = "ok" | "unknown";
+export type Status = "ok" | "down" | "unknown";
 export interface ServiceHealth {
     status: Status;
 }
@@ -19,4 +23,8 @@ export async function getAPIStatus(): Promise<StatusReport | null> {
     }
 
     return resp.json();
+}
+
+export function getAPIStatusEvents(): EventSource {
+    return new EventSource(resolve("/status/events"));
 }

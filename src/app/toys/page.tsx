@@ -4,7 +4,7 @@ import TOYS from "@/app/toys/lib/toy-data";
 import { ToyElement } from "@/app/toys/components/ToyElement";
 import { useIsMobile } from "@/app/lib/useIsMobile";
 import { useEffect, useState } from "react";
-import { getAPIStatus, StatusReport } from "@/app/lib/api";
+import { getAPIStatus, getAPIStatusEvents, StatusReport } from "@/app/lib/api";
 
 export default function Toys() {
     const isMobile = useIsMobile();
@@ -12,12 +12,39 @@ export default function Toys() {
     const [apiStatus, setApiStatus] = useState<StatusReport | null>(null);
 
     useEffect(() => {
+        // First time fetch
         async function fetch_data() {
             const status = await getAPIStatus();
             setApiStatus(status);
         }
         fetch_data();
+
+        const eventSource = getAPIStatusEvents();
+
+        eventSource.addEventListener("update", (event: MessageEvent) => {
+            const newData = JSON.parse(event.data) as StatusReport;
+            handleUpdate(newData);
+        });
+
+        return () => {
+            eventSource.close();
+        };
     }, []);
+
+    const handleUpdate = (updated: StatusReport) => {
+        setApiStatus((prev) => {
+            if (!prev) {
+                return prev;
+            }
+            const knownUpdates: StatusReport = {};
+            for (const k of Object.keys(updated)) {
+                if (k in prev) {
+                    knownUpdates[k] = updated[k];
+                }
+            }
+            return { ...prev, ...knownUpdates };
+        });
+    };
 
     return (
         <div className="flex flex-col gap-5 px-5 lg:px-20 py-10">
