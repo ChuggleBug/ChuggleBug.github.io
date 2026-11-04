@@ -47,7 +47,7 @@ export function ToyElement({
     const [flipped, setFlipped] = useState(false);
     const router = useRouter();
 
-    const showDemo = flipped || hoverTimeout;
+    const showDemo = hoverTimeout;
 
     // Counter-rotate content so it isn't mirrored while the card is flipped
     const unflip = flipped ? "rotate-y-180" : "";
